@@ -13,8 +13,8 @@ export default function Display(props) {
     setValue(e.target.value);
   };
   return (
-    <div calss="wrapperDisplay">
-      <div class="search">
+    <div className="wrapperDisplay">
+      <div className="search">
         <InputGroup size="md">
           <Input
             value={value}
@@ -32,7 +32,7 @@ export default function Display(props) {
           </InputRightElement>
         </InputGroup>
       </div>
-      <div class="result">
+      <div className="result">
         <p>{value}</p>
       </div>
     </div>
