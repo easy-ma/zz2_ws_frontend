@@ -1,11 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
+import TurradHeader from "./component/header";
+import Display from "./component/display";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Turradgiver</h1>
-    </div>
+    <>
+      <TurradHeader />
+      <Display />
+    </>
   );
 }
 
