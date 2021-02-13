@@ -7,7 +7,7 @@ const ImagesCard = ({
   images,
 }) => {
   return (
-    <Flex flexWrap="wrap">
+    <Flex flexWrap="wrap" justifyContent="center">
       {images.map((img, indx) => (
         <Image
           {...img.margin}

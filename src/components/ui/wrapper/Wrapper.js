@@ -1,13 +1,13 @@
 import { Box, SimpleGrid, GridItem, Text, Heading } from "@chakra-ui/react";
 import ImagesCard from "../cards/imagesCard";
 
-const Test = ({ images, title, desc, children }) => {
+const Wrapper = ({ images, title, desc, children }) => {
   return (
     <Box px={8} py={24} mx="auto">
       <SimpleGrid
         alignItems="center"
         w={{ base: "full", xl: 10 / 12 }}
-        columns={{ base: 1, lg: 11 }}
+        columns={{ base: 1, md: 1, lg: 11, xl: 11 }}
         gap={{ base: 0, lg: 24 }}
         mx="auto"
       >
@@ -35,10 +35,10 @@ const Test = ({ images, title, desc, children }) => {
           </Text>
           <ImagesCard images={images} />
         </GridItem>
-        <GridItem colSpan={{ base: "auto", md: 4 }}>{children}</GridItem>
+        <GridItem colSpan={{ base: "auto", lg: 5, xl: 5 }}>{children}</GridItem>
       </SimpleGrid>
     </Box>
   );
 };
 
-export default Test;
+export default Wrapper;
