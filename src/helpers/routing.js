@@ -4,11 +4,13 @@ import HomePage from "../pages/homePage";
 
 import SignInPage from "../pages/signInPage";
 import RegisterPage from "../pages/registerPage";
+import TermsPage from "../pages/termsPage";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
   { path: "/register", component: RegisterPage },
   { path: "/sign-in", component: SignInPage },
+  { path: "/terms-of-services", component: TermsPage },
 ];
 
 const Routing = () => {

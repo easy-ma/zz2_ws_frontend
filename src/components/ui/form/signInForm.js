@@ -76,7 +76,6 @@ const SignInForm = (props) => {
         </Formik>
       </Container>
       <Text fontSize="xs" textAlign="center" color="gray.600">
-        By signing up you agree to our{" "}
         <RLink color="brand.500" to="/terms-of-services">
           Terms of Service
         </RLink>
