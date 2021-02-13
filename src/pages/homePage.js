@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  IconButton,
-  InputGroup,
-  InputRightElement,
-  Input,
-} from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import SearchInput from "../components/ui/form/items/searchInput";
 
 export default function HomePage(props) {
   const [value, setValue] = useState("");
@@ -15,22 +9,7 @@ export default function HomePage(props) {
   return (
     <div className="wrapperDisplay">
       <div className="search">
-        <InputGroup size="md">
-          <Input
-            value={value}
-            onChange={handleChange}
-            pr="4.5rem"
-            type="text"
-            placeholder="search"
-          />
-          <InputRightElement width="4.5rem">
-            <IconButton
-              icon={<SearchIcon />}
-              variant="outline"
-              colorScheme="blackalpha"
-            ></IconButton>
-          </InputRightElement>
-        </InputGroup>
+        <SearchInput handleChange={handleChange} value={value} />
       </div>
       <div className="result">
         <p>{value}</p>
