@@ -1,28 +1,39 @@
+import React from "react";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { Container, Button, Heading, VStack } from "@chakra-ui/react";
-import ControlInput from "../components/ui/form/controlInput";
 import PasswordInput from "../components/ui/form/passwordInput";
 import ErrorBox from "../components/ui/form/errorBox";
+import ControlInput from "../components/ui/form/controlInput";
 import RLink from "../components/ui/links/routerLink";
 
 const initValues = {
   email: "",
+  username: "",
   password: "",
+  confirmedPassword: "",
 };
 
-const SignInPage = () => {
+const RegisterPage = () => {
   return (
     <Container bg="telegram.100" borderRadius={10} p={10} w="full" maxW="xl">
-      <Heading textAlign="center">Sign In</Heading>
-
+      <Heading textAlign="center">Register</Heading>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={initValues}
         validationSchema={Yup.object({
           email: Yup.string()
             .email("Invalid email address")
             .required("Required"),
-          password: Yup.string().required("Password is required"),
+          username: Yup.string()
+            .min(3, "Username min length 3")
+            .required("Username is required"),
+          password: Yup.string()
+            .min(8, "Min length 8")
+            .required("Password is required"),
+
+          confirmedPassword: Yup.string()
+            .oneOf([Yup.ref("password"), null], "Passwords must match")
+            .required("Confirmation Required"),
         })}
         onSubmit={(values, actions) => {
           setTimeout(() => {
@@ -39,6 +50,20 @@ const SignInPage = () => {
               errors={errors}
               touched={touched}
             />
+            <Field name="username">
+              {({ field, form }) => (
+                <ControlInput
+                  {...field}
+                  value={values.username}
+                  isInvalid={form.errors.username && form.touched.username}
+                  id="username"
+                  bg="telegram.50"
+                  type="text"
+                  placeholder="Enter username"
+                  onChange={handleChange}
+                />
+              )}
+            </Field>
             <Field name="email">
               {({ field, form }) => (
                 <ControlInput
@@ -53,6 +78,7 @@ const SignInPage = () => {
                 />
               )}
             </Field>
+
             <Field>
               {({ field, form }) => (
                 <PasswordInput
@@ -63,12 +89,30 @@ const SignInPage = () => {
                 />
               )}
             </Field>
+
+            <Field name="confirmedPassword">
+              {({ field, form }) => (
+                <ControlInput
+                  {...field}
+                  value={values.confirmedPassword}
+                  isInvalid={
+                    form.errors.confirmedPassword &&
+                    form.touched.confirmedPassword
+                  }
+                  id="confirmedPassword"
+                  bg="telegram.50"
+                  type="password"
+                  placeholder="Confirm password"
+                  onChange={handleChange}
+                />
+              )}
+            </Field>
             <VStack>
               <Button type="submit" variant="outline" isLoading={isSubmitting}>
                 Submit
               </Button>
-              <RLink to="/register" fontSize="small">
-                Create an account
+              <RLink fontSize="small" to="/sign-in">
+                Sign in
               </RLink>
             </VStack>
           </Form>
@@ -78,4 +122,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default RegisterPage;

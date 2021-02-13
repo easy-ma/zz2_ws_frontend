@@ -1,11 +1,12 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/homePage";
+import RegisterPage from "../pages/registerPage";
 import SignInPage from "../pages/signInPage";
 
 const routes = [
   //   { path: "/", component: HomePage },
-  // { path: "/register", component: RegisterPage },
+  { path: "/register", component: RegisterPage },
   { path: "/sign-in", component: SignInPage },
 ];
 
