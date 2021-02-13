@@ -5,7 +5,7 @@ import RegisterPage from "../pages/registerPage";
 import SignInPage from "../pages/signInPage";
 
 const routes = [
-  //   { path: "/", component: HomePage },
+  { path: "/", component: HomePage, exact: true },
   { path: "/register", component: RegisterPage },
   { path: "/sign-in", component: SignInPage },
 ];
@@ -23,6 +23,7 @@ const Routing = () => {
 const RouteWithSubRoutes = (route) => {
   return (
     <Route
+      exact={route.exact ? true : false}
       path={route.path}
       render={(props) => <route.component {...props} routes={route.routes} />}
     />
