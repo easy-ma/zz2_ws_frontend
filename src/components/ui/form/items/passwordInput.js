@@ -20,7 +20,6 @@ const PasswordInput = ({ value, isInvalid, field, onChange }) => {
           {...field}
           value={value}
           isInvalid={isInvalid}
-          bg="telegram.50"
           pr="4.5rem"
           isRequired={true}
           type={show ? "text" : "password"}
@@ -32,7 +31,7 @@ const PasswordInput = ({ value, isInvalid, field, onChange }) => {
             h="1.75rem"
             size="sm"
             onClick={handleClick}
-            bg={show ? "red.100" : "blue.100"}
+            bg={show ? "red.100" : "telegram.100"}
           >
             {show ? "Hide" : "Show"}
           </Button>

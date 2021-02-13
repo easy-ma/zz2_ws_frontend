@@ -1,9 +1,18 @@
 const Button = {
   baseStyle: {
-    marginTop: 0,
-    background: "yellow.100",
-    color: "black",
+    fontWeight: "bold",
+  },
+  variants: {
+    app: {
+      background: "blue.50",
+      color: "black",
+      size: "md",
+      marginTop: 0,
+    },
+  },
+  defaultProps: {
     size: "md",
+    variant: "app",
   },
 };
 export default Button;

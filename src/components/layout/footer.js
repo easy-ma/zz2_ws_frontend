@@ -6,8 +6,7 @@ const Footer = ({ flex }) => {
       flex={flex}
       maxW="full"
       width="full"
-      bg="telegram.200"
-      color="white"
+      layerStyle="baseLayer"
       padding="1rem"
       templateColumns="repeat(5, 1fr)"
       gap={0}

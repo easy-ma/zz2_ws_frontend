@@ -2,6 +2,7 @@ import { Flex, Heading, Spacer, Image, HStack } from "@chakra-ui/react";
 import RLink from "../ui/links/routerLink";
 
 const links = [
+  { name: "Home", path: "/" },
   { name: "Register", path: "/register" },
   { name: "SignIn", path: "/sign-in" },
 ];
@@ -10,7 +11,7 @@ const Header = () => {
   return (
     <Flex
       width="full"
-      bg="telegram.300"
+      layerStyle="baseLayer"
       alignItems="center"
       as="nav"
       p="1"

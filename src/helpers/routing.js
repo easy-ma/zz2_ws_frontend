@@ -1,8 +1,9 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/homePage";
-import RegisterPage from "../pages/registerPage";
+
 import SignInPage from "../pages/signInPage";
+import RegisterPage from "../pages/registerPage";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },

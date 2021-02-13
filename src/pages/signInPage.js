@@ -1,80 +1,21 @@
-import * as Yup from "yup";
-import { Field, Form, Formik } from "formik";
-import { Container, Button, Heading, VStack } from "@chakra-ui/react";
-import ControlInput from "../components/ui/form/controlInput";
-import PasswordInput from "../components/ui/form/passwordInput";
-import ErrorBox from "../components/ui/form/errorBox";
-import RLink from "../components/ui/links/routerLink";
+import Wrapper from "../components/ui/wrapper/Wrapper";
+import SignInForm from "../components/ui/form/signInForm";
 
-const initValues = {
-  email: "",
-  password: "",
-};
+const images = [
+  { src: "images/signin.jpeg", rotation: "-26deg", margin: { mt: "1rem" } },
+  { src: "images/signin2.jpeg", rotation: "6deg", margin: { mb: "1rem" } },
+  { src: "images/signin3.jpeg", rotation: "-6deg", margin: { mt: "1rem" } },
+  { src: "images/signin4.jpeg", rotation: "18deg", margin: { mb: "1.5rem" } },
+];
+
+const desc =
+  " At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in";
 
 const SignInPage = () => {
   return (
-    <Container bg="telegram.100" borderRadius={10} p={10} w="full" maxW="xl">
-      <Heading textAlign="center">Sign In</Heading>
-
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={Yup.object({
-          email: Yup.string()
-            .email("Invalid email address")
-            .required("Required"),
-          password: Yup.string().required("Password is required"),
-        })}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            actions.setSubmitting(false);
-            alert(JSON.stringify(values, null, 2));
-            actions.resetForm();
-          }, 1000);
-        }}
-      >
-        {({ values, isSubmitting, errors, handleChange, touched }) => (
-          <Form>
-            <ErrorBox
-              names={Object.keys(initValues)}
-              errors={errors}
-              touched={touched}
-            />
-            <Field name="email">
-              {({ field, form }) => (
-                <ControlInput
-                  {...field}
-                  value={values.email}
-                  isInvalid={form.errors.email && form.touched.email}
-                  id="email"
-                  bg="telegram.50"
-                  type="email"
-                  placeholder="Enter email"
-                  onChange={handleChange}
-                />
-              )}
-            </Field>
-            <Field>
-              {({ field, form }) => (
-                <PasswordInput
-                  field={field}
-                  value={values.password}
-                  isInvalid={form.errors.password && form.touched.password}
-                  onChange={handleChange}
-                />
-              )}
-            </Field>
-            <VStack>
-              <Button type="submit" variant="outline" isLoading={isSubmitting}>
-                Submit
-              </Button>
-              <RLink to="/register" fontSize="small">
-                Create an account
-              </RLink>
-            </VStack>
-          </Form>
-        )}
-      </Formik>
-    </Container>
+    <Wrapper images={images} title="Ready to start your journey?" desc={desc}>
+      <SignInForm mb={6} shadow="xl" borderRadius={10} />
+    </Wrapper>
   );
 };
 
