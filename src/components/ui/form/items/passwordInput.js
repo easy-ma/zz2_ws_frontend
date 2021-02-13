@@ -31,7 +31,7 @@ const PasswordInput = ({ value, isInvalid, field, onChange }) => {
             h="1.75rem"
             size="sm"
             onClick={handleClick}
-            bg={show ? "red.100" : "telegram.100"}
+            bg={show ? "red.100" : "telegram.50"}
           >
             {show ? "Hide" : "Show"}
           </Button>
