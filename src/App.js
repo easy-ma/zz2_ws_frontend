@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
-import TurradHeader from "./component/header";
-import Display from "./component/display";
+import TurradHeader from "./components/header";
+import Display from "./components/display";
 
 function App() {
   return (
