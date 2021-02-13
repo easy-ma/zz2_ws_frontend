@@ -1,10 +1,10 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Text } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
 
 const RLink = (props) => {
   return (
     <RouterLink to={props.to}>
-      <Text {...props}>{props.children}</Text>
+      <chakra.span {...props}>{props.children}</chakra.span>
     </RouterLink>
   );
 };
