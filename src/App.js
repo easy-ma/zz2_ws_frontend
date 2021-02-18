@@ -1,14 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
-import TurradHeader from "./component/header";
-import Display from "./component/display";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routing from "./helpers/routing";
+import Layout from "./components/layout/layout";
 
 function App() {
   return (
-    <>
-      <TurradHeader />
-      <Display />
-    </>
+    <div className="App">
+      <Router>
+        <Layout>
+          <Routing />
+        </Layout>
+      </Router>
+    </div>
   );
 }
 
