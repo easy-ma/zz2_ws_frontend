@@ -13,20 +13,12 @@ const routes = [
   { path: "/register", component: RegisterPage },
   { path: "/sign-in", component: SignInPage },
   { path: "/terms-of-services", component: TermsPage },
+  {path: "/ads/add",component: AddPage},
   { path: "*", component: NotFoundPage },
-  {
-    path: "/ad",
-    component : AddPage,
-    routes:[
-        {
-        path: "/add",
-        component: AddPage,
-        }
-    ]
-  }
 ];
 
 const Routing = () => {
+    
   return (
     <Switch>
       {routes.map((route, i) => (
@@ -37,7 +29,8 @@ const Routing = () => {
 };
 
 const RouteWithSubRoutes = (route) => {
-  let { path, exact = true } = route;
+    let { path, exact = true } = route;
+    console.log(exact,path);
   return (
     <Route
       exact={exact}

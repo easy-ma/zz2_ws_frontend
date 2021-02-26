@@ -11,7 +11,7 @@ export default function HomePage(props) {
   };
   return (
     <div className="wrapperDisplay">
-        <RLink to="/ad/add" > 
+        <RLink to="/ads/add" > 
              <IconButton aria-label="Search database" icon={<AddIcon />} />
         </RLink>
       <div className="search">
