@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Heading, List, ListItem, Text } from "@chakra-ui/react";
+import { Box, Center, Heading } from "@chakra-ui/react";
 
 const TermsPage = () => {
   return (
