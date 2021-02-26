@@ -6,6 +6,7 @@ import SignInPage from "../pages/signInPage";
 import RegisterPage from "../pages/registerPage";
 import TermsPage from "../pages/termsPage";
 import NotFoundPage from "../pages/404";
+import AddPage from "../pages/addPage"
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
@@ -13,6 +14,16 @@ const routes = [
   { path: "/sign-in", component: SignInPage },
   { path: "/terms-of-services", component: TermsPage },
   { path: "*", component: NotFoundPage },
+  {
+    path: "/ad",
+    component : AddPage,
+    routes:[
+        {
+        path: "/add",
+        component: AddPage,
+        }
+    ]
+  }
 ];
 
 const Routing = () => {

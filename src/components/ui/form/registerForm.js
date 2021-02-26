@@ -56,6 +56,7 @@ const RegisterForm = (props) => {
                   <ControlInput
                     {...field}
                     value={values.username}
+                    label="Username"
                     isInvalid={form.errors.username && form.touched.username}
                     id="username"
                     type="text"
@@ -69,6 +70,7 @@ const RegisterForm = (props) => {
                   <ControlInput
                     {...field}
                     value={values.email}
+                    label="email"
                     isInvalid={form.errors.email && form.touched.email}
                     id="email"
                     type="email"
@@ -98,6 +100,7 @@ const RegisterForm = (props) => {
                       form.errors.confirmedPassword &&
                       form.touched.confirmedPassword
                     }
+                    label="Confirm Password"
                     id="confirmedPassword"
                     type="password"
                     placeholder="Confirm password"
