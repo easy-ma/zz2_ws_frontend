@@ -5,6 +5,7 @@ const links = [
   { name: "Home", path: "/" },
   { name: "Register", path: "/register" },
   { name: "SignIn", path: "/sign-in" },
+  { name: "Profile", path: "/profile" },
 ];
 
 const Header = () => {

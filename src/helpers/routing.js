@@ -5,11 +5,13 @@ import HomePage from "../pages/homePage";
 import SignInPage from "../pages/signInPage";
 import RegisterPage from "../pages/registerPage";
 import TermsPage from "../pages/termsPage";
+import ProfilePage from "../pages/profilePage";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
   { path: "/register", component: RegisterPage },
   { path: "/sign-in", component: SignInPage },
+  { path: "/profile", component: ProfilePage },
   { path: "/terms-of-services", component: TermsPage },
 ];
 
