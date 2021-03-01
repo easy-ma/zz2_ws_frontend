@@ -1,13 +1,13 @@
 import { Flex, Image } from "@chakra-ui/react";
 
 const ImagesCard = ({
-  m = "0 0.5rem",
   boxSize = "180px",
   borderRadius = "0.8rem",
   images,
+  direction = "row",
 }) => {
   return (
-    <Flex flexWrap="wrap" justifyContent="center">
+    <Flex flexWrap="wrap" flexDirection={direction} justifyContent="center">
       {images.map((img, indx) => (
         <Image
           {...img.margin}

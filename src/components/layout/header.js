@@ -17,7 +17,7 @@ const Header = () => {
             boxSize="4rem"
             objectFit="cover"
             borderRadius="full"
-            src="main.png"
+            src="/main.png"
           />
           <Heading as="h1" p="unset" m="unset" size="lg">
             Turradgiver

@@ -45,6 +45,7 @@ const SignInForm = (props) => {
                   <ControlInput
                     {...field}
                     value={values.email}
+                    label="Email"
                     isInvalid={form.errors.email && form.touched.email}
                     id="email"
                     type="email"

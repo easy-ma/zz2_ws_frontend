@@ -6,6 +6,8 @@ import SignInPage from "../pages/signInPage";
 import RegisterPage from "../pages/registerPage";
 import TermsPage from "../pages/termsPage";
 import ProfilePage from "../pages/profilePage";
+import NotFoundPage from "../pages/404";
+import AddPage from "../pages/addPage";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
@@ -13,6 +15,8 @@ const routes = [
   { path: "/sign-in", component: SignInPage },
   { path: "/profile", component: ProfilePage },
   { path: "/terms-of-services", component: TermsPage },
+  { path: "/ads/add", component: AddPage },
+  { path: "*", component: NotFoundPage },
 ];
 
 const Routing = () => {
@@ -26,10 +30,12 @@ const Routing = () => {
 };
 
 const RouteWithSubRoutes = (route) => {
+  let { path, exact = true } = route;
+  console.log(exact, path);
   return (
     <Route
-      exact={route.exact ? true : false}
-      path={route.path}
+      exact={exact}
+      path={path}
       render={(props) => <route.component {...props} routes={route.routes} />}
     />
   );
