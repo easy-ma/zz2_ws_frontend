@@ -6,6 +6,8 @@ import PasswordInput from "./items/passwordInput";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import RLink from "../links/routerLink";
+import { useHistory, useLocation } from "react-router-dom";
+import Requester from "../../../Requester";
 
 const initValues = {
   email: "",
@@ -15,6 +17,9 @@ const initValues = {
 };
 
 const RegisterForm = (props) => {
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
   return (
     <>
       <Container {...props} p={10} w="full" maxW="lg">
@@ -36,12 +41,18 @@ const RegisterForm = (props) => {
               .oneOf([Yup.ref("password"), null], "Passwords must match")
               .required("Confirmation Required"),
           })}
-          onSubmit={(values, actions) => {
-            setTimeout(() => {
+          onSubmit={async (values, actions) => {
+            const res = await Requester.post("/auth/sign-up", values);
+            if (res.success === true) {
               actions.setSubmitting(false);
-              alert(JSON.stringify(values, null, 2));
+              props.signin(res.data.token, () => {
+                history.replace(from);
+              });
               actions.resetForm();
-            }, 1000);
+            } else {
+              actions.setSubmitting(false);
+              actions.resetForm();
+            }
           }}
         >
           {({ values, isSubmitting, errors, handleChange, touched }) => (

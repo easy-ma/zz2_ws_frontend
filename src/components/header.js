@@ -5,6 +5,7 @@ import Register from "./register";
 import AddConnected from "./addConnected";
 
 export default function TurradHeader() {
+  console.log("WTF");
   const [isConnected, setIsConnected] = useState(false);
   return (
     <div className="wrapperHeader">
