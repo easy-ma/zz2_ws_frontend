@@ -9,6 +9,7 @@ import ProfilePage from "../pages/profilePage";
 import NotFoundPage from "../pages/404";
 import AddPage from "../pages/addPage";
 import { useAuth } from "./auth";
+import { omitThemingProps } from "@chakra-ui/react";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
@@ -30,23 +31,25 @@ const Routing = () => {
   );
 };
 
-function PrivateRoute({ children, ...rest }) {
+function PrivateRoute(props) {
   let auth = useAuth();
+  console.log(props);
   return (
     <Route
-      {...rest}
-      render={({ location }) =>
-        auth.user ? (
-          children
+      exact={props.exact}
+      path={props.path}
+      render={(insideProps) => {
+        return auth.user ? (
+          props.render(insideProps)
         ) : (
           <Redirect
             to={{
               pathname: "/sign-in",
-              state: { from: location },
+              state: { from: insideProps.location },
             }}
           />
-        )
-      }
+        );
+      }}
     />
   );
 }

@@ -3,7 +3,7 @@ import Requester from "../Requester.js";
 
 const ProfilePage = () => {
   useEffect(() => {
-    Requester.get("/ads/get-all", { page: 2 }).then(console.log);
+    Requester.get("/ads/get", { page: 2 }, true).then(console.log);
   });
   return <div>hello</div>;
 };
