@@ -5,6 +5,9 @@ import ControlInput from "./items/controlInput";
 import PasswordInput from "./items/passwordInput";
 import ErrorBox from "./items/errorBox";
 import RLink from "../links/routerLink";
+import { useHistory, useLocation } from "react-router-dom";
+import Requester from "../../../Requester";
+import { useAuth } from "../../../helpers/auth";
 
 const initValues = {
   email: "",
@@ -12,25 +15,35 @@ const initValues = {
 };
 
 const SignInForm = (props) => {
+  const auth = useAuth();
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
   return (
     <>
       <Container {...props} p={10} w="full" maxW="lg">
         <Heading textAlign="center">Sign In</Heading>
 
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={initValues}
           validationSchema={Yup.object({
             email: Yup.string()
               .email("Invalid email address")
               .required("Required"),
             password: Yup.string().required("Password is required"),
           })}
-          onSubmit={(values, actions) => {
-            setTimeout(() => {
+          onSubmit={async (values, actions) => {
+            const res = await Requester.post("/auth/sign-in", values);
+            if (res.success === true) {
               actions.setSubmitting(false);
-              alert(JSON.stringify(values, null, 2));
+              auth.signin(res.data.token, () => {
+                history.replace(from);
+              });
               actions.resetForm();
-            }, 1000);
+            } else {
+              actions.setSubmitting(false);
+              actions.resetForm();
+            }
           }}
         >
           {({ values, isSubmitting, errors, handleChange, touched }) => (

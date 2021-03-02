@@ -10,10 +10,12 @@ class Requester {
     this.url = url;
   }
 
-  async _req(method, path, data, auth = false) {
+  async _req(method, path, data = {}, auth = false) {
     let token = null;
+
     if (auth) {
-      token = localStorage["token"];
+      // localstorage
+      token = localStorage.getItem("token");
     }
 
     const req = {
@@ -21,7 +23,7 @@ class Requester {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     };
 
@@ -31,7 +33,12 @@ class Requester {
       for (const e of param) {
         url.searchParams.set(e[0], e[1]);
       }
-    } else if (method === "POST") {
+    } else if (
+      method === "POST" ||
+      method === "DELETE" ||
+      method === "PUT" ||
+      method === "PATCH"
+    ) {
       req.body = JSON.stringify(data);
     }
 
@@ -39,7 +46,15 @@ class Requester {
       const res = await fetch(url.href, req);
       const resJson = await res.json();
 
-      return new Response(true, resJson);
+      if (res.status === 200) {
+        if (resJson.success === true) {
+          return new Response(true, resJson.data);
+        } else {
+          return new Response(false, resJson.data);
+        }
+      } else {
+        return new Response(false, resJson);
+      }
     } catch (err) {
       return new Response(false, null, err);
     }
@@ -69,6 +84,45 @@ class Requester {
    */
   post(path, data, auth) {
     return this._req("POST", path, data, auth);
+  }
+
+  /**
+   *
+   *
+   * @param {String} path
+   * @param {Object} data
+   * @param {Boolean} auth
+   * @returns {Promise<Response>}
+   * @memberof Requester
+   */
+  delete(path, data, auth) {
+    return this._req("DELETE", path, data, auth);
+  }
+
+  /**
+   *
+   *
+   * @param {String} path
+   * @param {Object} data
+   * @param {Boolean} auth
+   * @returns {Promise<Response>}
+   * @memberof Requester
+   */
+  put(path, data, auth) {
+    return this._req("PUT", path, data, auth);
+  }
+
+  /**
+   *
+   *
+   * @param {String} path
+   * @param {Object} data
+   * @param {Boolean} auth
+   * @returns {Promise<Response>}
+   * @memberof Requester
+   */
+  patch(path, data, auth) {
+    return this._req("PATCH", path, data, auth);
   }
 }
 

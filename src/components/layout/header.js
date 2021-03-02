@@ -1,14 +1,10 @@
 import { Flex, Heading, Spacer, Image, HStack, Center } from "@chakra-ui/react";
-import RLink from "../ui/links/routerLink";
+import { useAuth } from "../../helpers/auth";
+import AuthHeader from "./authHeader";
+import UnauthHeader from "./unauthHeader";
 
-const links = [
-  { name: "Home", path: "/" },
-  { name: "Register", path: "/register" },
-  { name: "SignIn", path: "/sign-in" },
-  { name: "Profile", path: "/profile" },
-];
-
-const Header = () => {
+const Header = (props) => {
+  const auth = useAuth();
   return (
     <Center>
       <Flex width="70%" as="nav" p="1" alignItems="center" align="center">
@@ -24,20 +20,7 @@ const Header = () => {
           </Heading>
         </HStack>
         <Spacer />
-        <Flex mr="2rem" justifyContent="space-around" width="20%">
-          {links.map((item, idx) => {
-            return (
-              <RLink
-                key={idx}
-                to={item.path}
-                fontSize="lg"
-                _hover={{ fontWeight: "bold" }}
-              >
-                {item.name}
-              </RLink>
-            );
-          })}
-        </Flex>
+        {auth.user ? <AuthHeader signout={auth.signout} /> : <UnauthHeader />}
       </Flex>
     </Center>
   );
