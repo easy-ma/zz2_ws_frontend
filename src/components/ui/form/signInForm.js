@@ -25,7 +25,7 @@ const SignInForm = (props) => {
         <Heading textAlign="center">Sign In</Heading>
 
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={initValues}
           validationSchema={Yup.object({
             email: Yup.string()
               .email("Invalid email address")
