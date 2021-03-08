@@ -1,4 +1,4 @@
-import { Flex,Button, Box } from '@chakra-ui/react';
+import { Flex,Button } from '@chakra-ui/react';
 import React,{useState} from 'react';
 import Ad from "../ad/ad"
 
