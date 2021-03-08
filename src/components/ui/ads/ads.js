@@ -1,19 +1,18 @@
-import React, { useState,useEffect,useReducer } from "react";
-import Slider from "./slider/slider"
-import requester from "../../../Requester"
-
+import React, { useState, useEffect, useReducer } from "react";
+import Slider from "./slider/slider";
+import requester from "../../../Requester";
 
 
 function reducer(state, action) {
-    switch (action.type) {
-      case 'increment':
-        return state + 1;
-      case 'decrement':
-        return state -1;
-      default:
-        throw new Error();
-    }
+  switch (action.type) {
+    case "increment":
+      return state + 1;
+    case "decrement":
+      return state - 1;
+    default:
+      throw new Error();
   }
+}
 
 const Ads = (props) => {
     const {endPoint,params,auth} = props;
