@@ -34,7 +34,6 @@ const Routing = () => {
 
 function PrivateRoute(props) {
   let auth = useAuth();
-  console.log(props);
   return (
     <Route
       exact={props.exact}

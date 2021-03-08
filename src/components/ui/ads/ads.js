@@ -14,7 +14,6 @@ function reducer(state, action) {
 }
 
 const fetchPage = (endpoint, pageNumber, params, auth, setState) => {
-  // console.log(params);
   requester.get(endpoint, { page: pageNumber, ...params }, auth).then((res) => {
     if (res.success) {
       setState((state) => ({

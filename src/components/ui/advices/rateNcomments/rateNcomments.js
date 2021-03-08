@@ -91,7 +91,6 @@ const RateNcomments = (props) => {
       }
     });
   }, [pageNumber]); //effet de bord: élement créant une dépendance de l'output
-  // console.log(pages[`page${pageNumber}`]);
   const maxPage = 3; //Math.ceil(MaxComments/2);
   const maxComments = 5; //res.length
   const user = useAuth().user;

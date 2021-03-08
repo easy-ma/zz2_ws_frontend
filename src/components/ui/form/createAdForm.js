@@ -35,14 +35,11 @@ const CreateAdForm = (props) => {
             .required("Image URL is required"),
         })}
         onSubmit={async (values, actions) => {
-          console.log(values, "coucou");
           const res = await Requester.post("/ads", values, true);
           if (res.success === true) {
             actions.setSubmitting(false);
-            console.log("Ad ajouté");
           } else {
             actions.setSubmitting(false);
-            console.log("Ad pas ajouté");
           }
         }}
       >
