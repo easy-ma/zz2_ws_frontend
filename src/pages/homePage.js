@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import SearchInput from "../components/ui/form/items/searchInput";
 import RLink from "../components/ui/links/routerLink";
-import { Center, HStack, IconButton } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import Ads from "../components/ui/ads/ads";
 import ImagesCard from "../components/ui/cards/imagesCard";
 
-import {
-  Flex,
-  Image,
-  Heading,
-  Text,
-  Button,
-  Box,
-  Divider,
-} from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 
 import NavPage from "../components/ui/advices/nextpage/navPage";
 import BigAd from "../components/ui/ads/ad/bigAd";
@@ -32,7 +24,7 @@ export default function HomePage(props) {
 
   return (
     <>
-      {!isZoom ? (
+      {/* {!isZoom ? (
         <div className="wrapperDisplay">
           <RLink to="/ads/add">
             <IconButton aria-label="Search database" icon={<AddIcon />} />
@@ -45,15 +37,14 @@ export default function HomePage(props) {
           </div>
           <Ads zoom={zoom} searchValue={value} endPoint="/ads/get-all"></Ads>
         </div>
-      ) : (
-        <Flex fex>
-          <BigAd />
-          <Box bg="" w="40%" p={4}>
-            <RateNcomments />
-            <NavPage zoom={zoom} />
-          </Box>
-        </Flex>
-      )}
+      ) : ( */}
+      <Flex fex>
+        <BigAd />
+        <Box bg="" w="40%" p={4}>
+          <RateNcomments zoom={zoom} endPoint="/rates/get-all" />
+        </Box>
+      </Flex>
+      {/* )} */}
     </>
   );
 }

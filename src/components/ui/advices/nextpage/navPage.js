@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { Flex, Box, Button, Center } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -6,12 +6,21 @@ const NavPage = (props) => {
   return (
     <>
       <Flex align="center" flexDir="column">
+        <Box textAlign="left">{props.pageNumber}</Box>
         <Flex>
           <Box fontSize="2vw" w="55%" textAlign="right">
-            <ArrowBackIcon color="teal" />
+            <ArrowBackIcon
+              color="teal"
+              onClick={() => props.dispatch({ type: "decrement" })}
+            />
           </Box>
           <Box fontSize="2vw" w="45%">
-            <ArrowForwardIcon color="teal" />
+            <ArrowForwardIcon
+              color="teal"
+              onClick={() =>
+                props.dispatch({ type: "increment", maxPage: props.maxPage })
+              }
+            />
           </Box>
         </Flex>
       </Flex>

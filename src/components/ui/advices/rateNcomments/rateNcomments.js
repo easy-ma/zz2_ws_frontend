@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import {
   Flex,
   Image,
@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import Advice from "../advice";
+import NavPage from "../nextpage/navPage";
+import requester from "../../../../Requester";
 
 const ad = {
   imgSrc: "images/card_Example.jpg",
@@ -30,7 +32,67 @@ const comment1 = {
   rate: 1,
 };
 
+const comment2 = {
+  name: "djo lopez",
+  title: "le sang de ses morts",
+  description:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+  rate: 2,
+};
+
+const comment3 = {
+  name: "djo lopez",
+  title: "le sang de ses morts",
+  description:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+  rate: 3,
+};
+
+const comment4 = {
+  name: "djo lopez",
+  title: "le sang de ses morts",
+  description:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+  rate: 4,
+};
+
+const comment5 = {
+  name: "djo lopez",
+  title: "le sang de ses morts",
+  description:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+  rate: 5,
+};
+
+const comments = [comment1, comment2, comment3, comment4, comment5];
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return action.maxPage === state ? state : state + 1;
+    case "decrement":
+      return state === 1 ? state : state - 1;
+    default:
+      throw new Error();
+  }
+}
+
 const RateNcomments = (props) => {
+  const { endPoint, params } = props;
+  const [rates, setRates] = useState([]);
+  const [pageNumber, dispatch] = useReducer(reducer, 1);
+  useEffect(() => {
+    requester.get({ endPoint }, { page: pageNumber, ...params }).then((res) => {
+      if (res.success) {
+        setRates([...rates, ...res.data]);
+      } else {
+        console.error("Error");
+      }
+    });
+  }, [pageNumber]); //effet de bord: élement créant une dépendance de l'output
+  // console.log(pages[`page${pageNumber}`]);
+  const maxPage = 3; //Math.ceil(MaxComments/2);
+  const maxComments = 5; //res.length
   return (
     <>
       <Box h="10*" margin="10px">
@@ -70,18 +132,26 @@ const RateNcomments = (props) => {
           </Flex>
         </Box>
         <Advice
-          name={comment1.name}
-          title={comment1.title}
-          description={comment1.description}
-          rate={comment1.rate}
+          name={comments[2 * (pageNumber - 1)].name}
+          title={comments[2 * (pageNumber - 1)].title}
+          description={comments[2 * (pageNumber - 1)].description}
+          rate={comments[2 * (pageNumber - 1)].rate}
         />
-        <Advice
-          name={comment1.name}
-          title={comment1.title}
-          description={comment1.description}
-          rate={comment1.rate}
-        />
+        {maxPage === pageNumber && maxComments % 2 != 0 ? null : (
+          <Advice
+            name={comments[2 * (pageNumber - 1) + 1].name}
+            title={comments[2 * (pageNumber - 1) + 1].title}
+            description={comments[2 * (pageNumber - 1) + 1].description}
+            rate={comments[2 * (pageNumber - 1) + 1].rate}
+          />
+        )}
       </Flex>
+      <NavPage
+        maxPage={maxPage}
+        pageNumber={pageNumber}
+        zoom={props.zoom}
+        dispatch={dispatch}
+      />
     </>
   );
 };

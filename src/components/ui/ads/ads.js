@@ -63,6 +63,7 @@ const Ads = (props) => {
   const [ads, setAds] = useState([]);
   const [pageNumber, dispatch] = useReducer(reducer, 1);
 
+  // <Ads zoom={zoom} searchValue={value} endPoint="/ads/get-all"></Ads>
   useEffect(() => {
     requester.get({ endPoint }, { page: pageNumber, ...params }).then((res) => {
       if (res.success) {
