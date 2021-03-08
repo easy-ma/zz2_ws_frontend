@@ -34,10 +34,7 @@ export default function HomePage(props) {
           <div className="search">
             <SearchInput handleChange={handleChange} value={value} />
           </div>
-          <div className="result">
-            <p>{value}</p>
-          </div>
-          <Ads zoom={zoom} params={{ search: value }} endPoint="/ads"></Ads>
+          <Ads params={{ search: value }} endPoint="/ads"></Ads>
         </div>
       ) : (
         <Flex fex>

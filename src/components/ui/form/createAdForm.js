@@ -38,6 +38,7 @@ const CreateAdForm = (props) => {
           const res = await Requester.post("/ads", values, true);
           if (res.success === true) {
             actions.setSubmitting(false);
+            actions.resetForm();
           } else {
             actions.setSubmitting(false);
           }
