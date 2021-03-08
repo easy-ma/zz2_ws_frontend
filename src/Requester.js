@@ -7,7 +7,8 @@ class Response {
 }
 class Requester {
   constructor(url) {
-    this.url = url;
+      this.version = 1;
+    this.url = `${url}/v${this.version}`;
   }
 
   async _req(method, path, data = {}, auth = false) {
