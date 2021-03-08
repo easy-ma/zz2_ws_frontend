@@ -14,6 +14,7 @@ import Advice from "../advice";
 import NavPage from "../nextpage/navPage";
 import requester from "../../../../Requester";
 import RLink from "../../links/routerLink";
+import { useAuth } from "../../../../helpers/auth";
 
 const ad = {
   imgSrc: "images/card_Example.jpg",
@@ -94,6 +95,7 @@ const RateNcomments = (props) => {
   // console.log(pages[`page${pageNumber}`]);
   const maxPage = 3; //Math.ceil(MaxComments/2);
   const maxComments = 5; //res.length
+  const user = useAuth().user;
   return (
     <>
       <Box h="10*" margin="10px">
@@ -127,11 +129,13 @@ const RateNcomments = (props) => {
               Comments:{" "}
             </Text>
             <Spacer />
-            <RLink to="/comment/add">
-              <Button bg="teal" size="sm">
-                Add a comment
-              </Button>
-            </RLink>
+            {user && (
+              <RLink to="/comment/add">
+                <Button bg="teal" size="sm">
+                  Add a comment
+                </Button>
+              </RLink>
+            )}
           </Flex>
         </Box>
         <Advice
