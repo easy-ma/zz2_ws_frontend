@@ -5,39 +5,47 @@ import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import TextAreaInput from "./items/textAreaInput";
 import * as Yup from "yup";
+import Requester from "../../../Requester";
 
+const initValues = { title: "", address: "", description: "", price:"" , imageURL:"" };
 const AddAdForm = (props) => {
-  const initValues = {};
   return (
     <Box w="full" p={20}>
       <Formik
-        initialValues={{ title: "", description: "", address: "" }}
+        initialValues={initValues}
         validationSchema={Yup.object({
           title: Yup.string().required("Title is required"),
           description: Yup.string().required("Description is required"),
           address: Yup.string().required("Adress is required."),
+          price: Yup.number().typeError("Price must be a positive number").positive("Price must be positive").required("Price is required"),
+          imageURL: Yup.string().matches(/^(https?:)?\/\/?[^'" <>]+?\.(jpg|jpeg|gif|png)$/,"Url must be valide and lead to an image").required("Image URL is required"),
         })}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            actions.setSubmitting(false);
-            alert(JSON.stringify(values, null, 2));
-            actions.resetForm();
-          }, 1000);
-        }}
+        onSubmit={async (values, actions) => {
+            console.log(values,"coucou");
+            const res = await Requester.post("/ads", values,true);
+            if (res.success === true) {
+                actions.setSubmitting(false);
+                console.log("Ad ajouté");
+            } else {
+                actions.setSubmitting(false);
+                console.log("Ad pas ajouté");
+            }
+          }}
       >
         {({ values, isSubmitting, errors, handleChange, touched }) => (
           <Form>
             <ErrorBox
-              names={Object.keys(initValues)}
-              errors={errors}
-              touched={touched}
-            />
+                names={Object.keys(initValues)}
+                errors={errors}
+                touched={touched}
+              />
 
             <Field name="title">
               {({ field, form }) => (
                 <ControlInput
                   {...field}
                   value={values.title}
+                  isInvalid={form.errors.title && form.touched.title}
                   label="Title"
                   id="title"
                   placeholder="Enter your title"
@@ -46,15 +54,44 @@ const AddAdForm = (props) => {
               )}
             </Field>
 
-            <Field name="adress">
+            <Field name="address">
               {({ field, form }) => (
                 <ControlInput
                   {...field}
-                  value={values.adress}
-                  label="Adress"
-                  id="Adress"
-                  type="Adress"
-                  placeholder="Enter your Adress"
+                  value={values.address}
+                  isInvalid={form.errors.address && form.touched.address}
+                  label="Address"
+                  id="address"
+                  type="text"
+                  placeholder="Enter your address"
+                  onChange={handleChange}
+                />
+              )}
+            </Field>
+            <Field name="price">
+              {({ field, form }) => (
+                <ControlInput
+                  {...field}
+                  value={values.price}
+                  label="Price"
+                  id="price"
+                  isInvalid={form.errors.price && form.touched.price}
+                  type="text"
+                  placeholder="Enter the price"
+                  onChange={handleChange}
+                />
+              )}
+            </Field>
+            <Field name="imageURL">
+              {({ field, form }) => (
+                <ControlInput
+                  {...field}
+                  value={values.imageURL}
+                  label="Image URL"
+                  id="imageURL"
+                  isInvalid={form.errors.imageURL && form.touched.imageURL}
+                  type="text"
+                  placeholder="Enter the imageURL"
                   onChange={handleChange}
                 />
               )}
@@ -66,21 +103,9 @@ const AddAdForm = (props) => {
                   value={values.description}
                   label="Description"
                   id="description"
-                  type="description"
+                  isInvalid={form.errors.description && form.touched.description}
+                  type="text"
                   placeholder="Enter your description"
-                  onChange={handleChange}
-                />
-              )}
-            </Field>
-            <Field name="Images">
-              {({ field, form }) => (
-                <ControlInput
-                  {...field}
-                  value={values.description}
-                  label="Images"
-                  id="Images"
-                  type="file"
-                  placeholder="Enter your images"
                   onChange={handleChange}
                 />
               )}
