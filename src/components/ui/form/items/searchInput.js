@@ -5,13 +5,26 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { useState} from "react";
 
 const SearchInput = ({ value, handleChange }) => {
+
+    const [timer, setTimer] = useState(null);
+    const [previousText, setPreviousText] = useState("");
+
+    const debounceChange = (e) => {
+        if (previousText !== e.target.value) {
+            clearTimeout(timer);
+            const timeoutId = setTimeout(() => handleChange(e.target.value), 1000);
+            setTimer(timeoutId);
+            setPreviousText(e.target.value);
+        }
+    }
+
   return (
     <InputGroup size="md">
       <Input
-        value={value}
-        onChange={handleChange}
+        onChange={debounceChange}
         pr="15rem"
         type="text"
         placeholder="search"

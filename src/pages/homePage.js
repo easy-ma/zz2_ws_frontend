@@ -9,8 +9,8 @@ import Ads from "../components/ui/ads/ads"
 export default function HomePage(props) {
   const [value, setValue] = useState("");
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
+  const handleChange = (value) => {
+    setValue(value);
   };
 
   return (
@@ -24,7 +24,7 @@ export default function HomePage(props) {
         <div className="result">
             <p>{value}</p>
         </div>
-        <Ads searchValue={value} endPoint="/ads/get-all"></Ads>
+        <Ads params={{search : value}} endPoint="/ads/all"></Ads>
     </div>
   );
 }
