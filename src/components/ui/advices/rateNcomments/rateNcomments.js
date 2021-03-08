@@ -13,6 +13,7 @@ import { StarIcon } from "@chakra-ui/icons";
 import Advice from "../advice";
 import NavPage from "../nextpage/navPage";
 import requester from "../../../../Requester";
+import RLink from "../../links/routerLink";
 
 const ad = {
   imgSrc: "images/card_Example.jpg",
@@ -126,9 +127,11 @@ const RateNcomments = (props) => {
               Comments:{" "}
             </Text>
             <Spacer />
-            <Button bg="teal" size="sm">
-              Add a comment
-            </Button>
+            <RLink to="/comment/add">
+              <Button bg="teal" size="sm">
+                Add a comment
+              </Button>
+            </RLink>
           </Flex>
         </Box>
         <Advice

@@ -24,7 +24,7 @@ export default function HomePage(props) {
 
   return (
     <>
-      {/* {!isZoom ? (
+      {!isZoom ? (
         <div className="wrapperDisplay">
           <RLink to="/ads/add">
             <IconButton aria-label="Search database" icon={<AddIcon />} />
@@ -37,14 +37,14 @@ export default function HomePage(props) {
           </div>
           <Ads zoom={zoom} searchValue={value} endPoint="/ads/get-all"></Ads>
         </div>
-      ) : ( */}
-      <Flex fex>
-        <BigAd />
-        <Box bg="" w="40%" p={4}>
-          <RateNcomments zoom={zoom} endPoint="/rates/get-all" />
-        </Box>
-      </Flex>
-      {/* )} */}
+      ) : (
+        <Flex fex>
+          <BigAd />
+          <Box bg="" w="40%" p={4}>
+            <RateNcomments zoom={zoom} endPoint="/rates/get-all" />
+          </Box>
+        </Flex>
+      )}
     </>
   );
 }

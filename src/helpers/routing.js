@@ -8,6 +8,7 @@ import TermsPage from "../pages/termsPage";
 import ProfilePage from "../pages/profilePage";
 import NotFoundPage from "../pages/404";
 import AddPage from "../pages/addPage";
+import AddCommentPage from "../pages/addCommentPage";
 import { useAuth } from "./auth";
 import { omitThemingProps } from "@chakra-ui/react";
 
@@ -18,6 +19,7 @@ const routes = [
   { path: "/profile", component: ProfilePage, auth: true },
   { path: "/terms-of-services", component: TermsPage },
   { path: "/ads/add", component: AddPage },
+  { path: "/comment/add", component: AddCommentPage },
   { path: "*", component: NotFoundPage },
 ];
 
