@@ -8,7 +8,7 @@ const AddPage = (props) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   return (
     <Flex flexDirection="column" justifyContent="space-around" h="70%">
-      <Heading textAlign="center" w="100%" as="H2">
+      <Heading textAlign="center" w="100%" as="h2">
         {" "}
         Hi {user?.name ?? "Six balles"}, you are about to add a place !
       </Heading>
