@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Heading, Image } from "@chakra-ui/react";
-import AddAdForm from "../components/ui/form/addAdForm";
+import CreateAdForm from "../components/ui/form/createAdForm";
 import { useMediaQuery } from "@chakra-ui/react";
 
 const AddPage = (props) => {
@@ -28,7 +28,7 @@ const AddPage = (props) => {
           ml={6}
           borderRadius="5%"
         >
-          <AddAdForm />
+          <CreateAdForm />
         </Flex>
       </Flex>
     </Flex>

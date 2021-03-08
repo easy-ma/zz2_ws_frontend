@@ -1,6 +1,6 @@
-import { Flex,Button } from '@chakra-ui/react';
-import React,{useState} from 'react';
-import Ad from "../ad/ad"
+import { Flex, Button } from "@chakra-ui/react";
+import React, { useState } from "react";
+import Ad from "../ad/ad";
 
 import Fade from "react-reveal/Fade";
 // import Flip from 'react-reveal/Flip'
@@ -27,7 +27,7 @@ const Slider = (props) => {
       )}
       <Fade left={left} right={!left} spy={ads}>
         {ads?.map((ad) => (
-          <Ad ad={ad} zoom={props.zoom}></Ad>
+          <Ad key={ad.id} ad={ad} zoom={props.zoom}></Ad>
         ))}
       </Fade>
       {rightButton ? (

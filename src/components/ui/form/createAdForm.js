@@ -7,48 +7,62 @@ import TextAreaInput from "./items/textAreaInput";
 import * as Yup from "yup";
 import Requester from "../../../Requester";
 
-const initValues = { title: "", address: "", description: "", price:"" , imageURL:"" };
-const AddAdForm = (props) => {
+const initValues = {
+  name: "",
+  address: "",
+  description: "",
+  price: "",
+  imageURL: "",
+};
+const CreateAdForm = (props) => {
   return (
     <Box w="full" p={20}>
       <Formik
         initialValues={initValues}
         validationSchema={Yup.object({
-          title: Yup.string().required("Title is required"),
+          name: Yup.string().required("Name is required"),
           description: Yup.string().required("Description is required"),
           address: Yup.string().required("Adress is required."),
-          price: Yup.number().typeError("Price must be a positive number").positive("Price must be positive").required("Price is required"),
-          imageURL: Yup.string().matches(/^(https?:)?\/\/?[^'" <>]+?\.(jpg|jpeg|gif|png)$/,"Url must be valide and lead to an image").required("Image URL is required"),
+          price: Yup.number()
+            .typeError("Price must be a positive number")
+            .positive("Price must be positive")
+            .required("Price is required"),
+          imageURL: Yup.string()
+            .matches(
+              /^(https?:)?\/\/?[^'" <>]+?\.(jpg|jpeg|gif|png)$/,
+              "Url must be valide and lead to an image"
+            )
+            .required("Image URL is required"),
         })}
         onSubmit={async (values, actions) => {
-            console.log(values,"coucou");
-            const res = await Requester.post("/ads", values,true);
-            if (res.success === true) {
-                actions.setSubmitting(false);
-                console.log("Ad ajouté");
-            } else {
-                actions.setSubmitting(false);
-                console.log("Ad pas ajouté");
-            }
-          }}
+          console.log(values, "coucou");
+          const res = await Requester.post("/ads", values, true);
+          if (res.success === true) {
+            actions.setSubmitting(false);
+            console.log("Ad ajouté");
+          } else {
+            actions.setSubmitting(false);
+            console.log("Ad pas ajouté");
+          }
+        }}
       >
         {({ values, isSubmitting, errors, handleChange, touched }) => (
           <Form>
             <ErrorBox
-                names={Object.keys(initValues)}
-                errors={errors}
-                touched={touched}
-              />
+              names={Object.keys(initValues)}
+              errors={errors}
+              touched={touched}
+            />
 
-            <Field name="title">
+            <Field name="name">
               {({ field, form }) => (
                 <ControlInput
                   {...field}
-                  value={values.title}
-                  isInvalid={form.errors.title && form.touched.title}
-                  label="Title"
-                  id="title"
-                  placeholder="Enter your title"
+                  value={values.name}
+                  isInvalid={form.errors.name && form.touched.name}
+                  label="Name"
+                  id="name"
+                  placeholder="Enter the name"
                   onChange={handleChange}
                 />
               )}
@@ -103,7 +117,9 @@ const AddAdForm = (props) => {
                   value={values.description}
                   label="Description"
                   id="description"
-                  isInvalid={form.errors.description && form.touched.description}
+                  isInvalid={
+                    form.errors.description && form.touched.description
+                  }
                   type="text"
                   placeholder="Enter your description"
                   onChange={handleChange}
@@ -122,4 +138,4 @@ const AddAdForm = (props) => {
   );
 };
 
-export default AddAdForm;
+export default CreateAdForm;

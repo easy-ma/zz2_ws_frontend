@@ -1,6 +1,6 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { Flex, Box, Button, Center } from "@chakra-ui/react";
-import { ArrowBackIcon, ArrowForwardIcon, CloseIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 const NavPage = (props) => {
   return (

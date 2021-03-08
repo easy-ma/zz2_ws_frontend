@@ -4,38 +4,40 @@ import RLink from "../components/ui/links/routerLink";
 import { IconButton } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import Ads from "../components/ui/ads/ads";
-import ImagesCard from "../components/ui/cards/imagesCard";
-
-import { Flex, Box } from "@chakra-ui/react";
-
-import NavPage from "../components/ui/advices/nextpage/navPage";
 import BigAd from "../components/ui/ads/ad/bigAd";
+import { Flex, Box } from "@chakra-ui/react";
 import RateNcomments from "../components/ui/advices/rateNcomments/rateNcomments";
+import { useAuth } from "../helpers/auth";
 
 export default function HomePage(props) {
   const [value, setValue] = useState("");
   const [isZoom, setIsZoom] = useState(false);
-  const handleChange = (e) => {
-    setValue(value);
+  const { user } = useAuth();
+
+  const handleChange = (val) => {
+    setValue(val);
   };
-  function zoom() {
+
+  const zoom = () => {
     setIsZoom(!isZoom);
-  }
+  };
 
   return (
     <>
       {!isZoom ? (
         <div className="wrapperDisplay">
-          <RLink to="/ads/add">
-            <IconButton aria-label="Search database" icon={<AddIcon />} />
-          </RLink>
+          {user && (
+            <RLink to="/ads/add">
+              <IconButton aria-label="Add ad" icon={<AddIcon />} />
+            </RLink>
+          )}
           <div className="search">
             <SearchInput handleChange={handleChange} value={value} />
           </div>
           <div className="result">
             <p>{value}</p>
           </div>
-          <Ads zoom={zoom}params={{search : value}}  endPoint="/ads/all"></Ads>
+          <Ads zoom={zoom} params={{ search: value }} endPoint="/ads"></Ads>
         </div>
       ) : (
         <Flex fex>

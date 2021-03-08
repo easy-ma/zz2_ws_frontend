@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect, useState } from "react";
 import {
   Flex,
-  Image,
   Heading,
   Text,
   Box,
@@ -144,7 +143,7 @@ const RateNcomments = (props) => {
           description={comments[2 * (pageNumber - 1)].description}
           rate={comments[2 * (pageNumber - 1)].rate}
         />
-        {maxPage === pageNumber && maxComments % 2 != 0 ? null : (
+        {maxPage === pageNumber && maxComments % 2 !== 0 ? null : (
           <Advice
             name={comments[2 * (pageNumber - 1) + 1].name}
             title={comments[2 * (pageNumber - 1) + 1].title}

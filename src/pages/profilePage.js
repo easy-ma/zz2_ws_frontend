@@ -1,34 +1,30 @@
-import Requester from "../Requester.js";
-import React, { useEffect,useState } from "react";
+import React, { useState } from "react";
 import SearchInput from "../components/ui/form/items/searchInput";
 import RLink from "../components/ui/links/routerLink";
 import { IconButton } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import Ads from "../components/ui/ads/ads"
+import Ads from "../components/ui/ads/ads";
 
-const ProfilePage = props => {
-    const [value, setValue] = useState("");
+const ProfilePage = (props) => {
+  const [value, setValue] = useState("");
 
-
-    const handleChange = (value) => {
-      setValue(value);
-    };
-
-
+  const handleChange = (value) => {
+    setValue(value);
+  };
 
   return (
-  <div className="wrapperDisplay">
-    <RLink to="/ads/add">
+    <div className="wrapperDisplay">
+      <RLink to="/ads/add">
         <IconButton aria-label="Search database" icon={<AddIcon />} />
-    </RLink>
-    <div className="search">
+      </RLink>
+      <div className="search">
         <SearchInput handleChange={handleChange} value={value} />
-    </div>
-    <div className="result">
+      </div>
+      <div className="result">
         <p>{value}</p>
+      </div>
+      <Ads params={{ search: value }} endPoint="/user/ads" auth></Ads>
     </div>
-    <Ads params={{search : value}} endPoint="/user/ads" auth></Ads>
-</div>
   );
 };
 

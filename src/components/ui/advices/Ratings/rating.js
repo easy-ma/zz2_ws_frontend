@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, PseudoBox, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
 const Rating = React.forwardRef(
