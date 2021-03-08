@@ -25,11 +25,11 @@ const Slider = (props) => {
       ) : (
         ""
       )}
-      <Fade left={left} right={!left} spy={ads}>
-        {ads?.map((ad) => (
-          <Ad key={ad.id} ad={ad} zoom={props.zoom}></Ad>
-        ))}
-      </Fade>
+      {/* <Fade left={left} right={!left} spy={ads}> */}
+      {ads?.map((ad) => (
+        <Ad key={ad.id} ad={ad} zoom={props.zoom}></Ad>
+      ))}
+      {/* </Fade> */}
       {rightButton ? (
         <Button
           onClick={() => {
