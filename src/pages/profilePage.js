@@ -22,9 +22,16 @@ const ProfilePage = (props) => {
           </Button>
         </RLink>
       </Box>
-      <Heading as="h2" position="absolute" top="20vh" left="42.5vw" w="15vw">
-        {" "}
-        This is your ads
+      <Heading
+        as="h2"
+        position="absolute"
+        top="20vh"
+        left="37.5vw"
+        w="25vw"
+        fontSize="3vw"
+        textAlign="center"
+      >
+        This is your ads !
       </Heading>
       <Box position="absolute" top="30vh" left="30vw" w="40vw">
         <SearchInput handleChange={handleChange} value={value} />
