@@ -12,7 +12,7 @@ import React from "react";
 const Ad = (props) => {
   const { ad } = props;
   return (
-        <Flex
+    <Flex
       w="18vw"
       flexDirection="column"
       boxShadow="xl"
@@ -24,7 +24,6 @@ const Ad = (props) => {
         <Image
           w="100%"
           h="100%"
-          
           src={
             ad.imageURL ??
             "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539__340.jpg"

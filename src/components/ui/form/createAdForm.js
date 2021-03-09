@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, Form, Formik } from "formik";
-import { Button, VStack, Box,useToast } from "@chakra-ui/react";
+import { Button, VStack, Box, useToast } from "@chakra-ui/react";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import TextAreaInput from "./items/textAreaInput";
@@ -37,7 +37,6 @@ const CreateAdForm = (props) => {
         })}
         onSubmit={async (values, actions) => {
           const res = await Requester.post("/ads", values, true);
-          console.log(res);
           if (res.success === true) {
             toast({
               title: "Ad created.",
@@ -45,7 +44,7 @@ const CreateAdForm = (props) => {
               status: "success",
               duration: 7000,
               isClosable: true,
-            })
+            });
             actions.setSubmitting(true);
             actions.resetForm();
           } else {
@@ -55,7 +54,7 @@ const CreateAdForm = (props) => {
               status: "error",
               duration: 7000,
               isClosable: true,
-            })
+            });
             actions.setSubmitting(false);
           }
         }}

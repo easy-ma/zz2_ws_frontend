@@ -1,6 +1,13 @@
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
-import { Container, Text, Button, Heading, VStack,useToast } from "@chakra-ui/react";
+import {
+  Container,
+  Text,
+  Button,
+  Heading,
+  VStack,
+  useToast,
+} from "@chakra-ui/react";
 import ControlInput from "./items/controlInput";
 import PasswordInput from "./items/passwordInput";
 import ErrorBox from "./items/errorBox";
@@ -42,9 +49,9 @@ const SignInForm = (props) => {
                 status: "success",
                 duration: 7000,
                 isClosable: true,
-              })
+              });
               actions.setSubmitting(true);
-              auth.signin(res.data.token, () => {
+              auth.signin(res.data, () => {
                 history.replace(from);
               });
               actions.resetForm();
@@ -55,7 +62,7 @@ const SignInForm = (props) => {
                 status: "error",
                 duration: 7000,
                 isClosable: true,
-              })
+              });
               actions.setSubmitting(false);
               actions.resetForm();
             }

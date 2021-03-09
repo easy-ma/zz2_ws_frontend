@@ -11,15 +11,15 @@ const Slider = (props) => {
   return (
     <Flex mt="150px" justifyContent="center" w="80vw" alignItems="center">
       {leftButton ? (
-          <ArrowLeftIcon
-            zIndex="1000"
-            fontSize="2vw"
-            color="teal"
-            onClick={() => {
-              dispatch({ type: "decrement" });
-              setLeft(true);
-            }}
-            ></ArrowLeftIcon>
+        <ArrowLeftIcon
+          zIndex="1000"
+          fontSize="2vw"
+          color="teal"
+          onClick={() => {
+            dispatch({ type: "decrement" });
+            setLeft(true);
+          }}
+        ></ArrowLeftIcon>
       ) : (
         ""
       )}
@@ -31,15 +31,14 @@ const Slider = (props) => {
         </Flex>
       </Fade>
       {rightButton ? (
-          <ArrowRightIcon
-            color="teal"
-            fontSize="2vw"
-            onClick={() => {
-              dispatch({ type: "increment" });
-              setLeft(false);
-            }}
-            >
-          </ArrowRightIcon>
+        <ArrowRightIcon
+          color="teal"
+          fontSize="2vw"
+          onClick={() => {
+            dispatch({ type: "increment" });
+            setLeft(false);
+          }}
+        ></ArrowRightIcon>
       ) : (
         ""
       )}

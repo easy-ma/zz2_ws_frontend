@@ -4,7 +4,6 @@ import CreateAdForm from "../components/ui/form/createAdForm";
 import { useMediaQuery } from "@chakra-ui/react";
 
 const AddPage = (props) => {
-  const { user } = props;
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   return (
     <Flex flexDirection="column" justifyContent="space-around" h="70%">

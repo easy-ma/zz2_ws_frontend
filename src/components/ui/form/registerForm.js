@@ -1,14 +1,21 @@
 import React from "react";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
-import { Container, Button, Heading, VStack, Text,useToast } from "@chakra-ui/react";
+import {
+  Container,
+  Button,
+  Heading,
+  VStack,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import PasswordInput from "./items/passwordInput";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import RLink from "../links/routerLink";
 import { useHistory, useLocation } from "react-router-dom";
 import Requester from "../../../Requester";
-import {useAuth} from "../../../helpers/auth"
+import { useAuth } from "../../../helpers/auth";
 
 const initValues = {
   email: "",
@@ -53,9 +60,9 @@ const RegisterForm = (props) => {
                 status: "success",
                 duration: 7000,
                 isClosable: true,
-              })
+              });
               actions.setSubmitting(true);
-              auth.signin(res.data.token, () => {
+              auth.signin(res.data, () => {
                 history.replace(from);
               });
               actions.resetForm();
@@ -66,7 +73,7 @@ const RegisterForm = (props) => {
                 status: "error",
                 duration: 7000,
                 isClosable: true,
-              })
+              });
               actions.setSubmitting(false);
               actions.resetForm();
             }
