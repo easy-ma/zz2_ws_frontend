@@ -21,7 +21,15 @@ const Ad = (props) => {
       mb="5vw"
     >
       <Box w="auto" h="15%">
-        <Image w="100%" h="auto" src={ad.imageURL} overflow="scroll" />
+        <Image
+          w="100%"
+          h="auto"
+          src={
+            ad.imageURL ??
+            "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539__340.jpg"
+          }
+          overflow="scroll"
+        />
       </Box>
       <Flex flexDirection="column" h="65%" justifyContent="space-between" p={6}>
         <Box h="30%">
