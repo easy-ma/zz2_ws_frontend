@@ -36,9 +36,6 @@ const ProfilePage = (props) => {
       <Box position="absolute" top="30vh" left="30vw" w="40vw">
         <SearchInput handleChange={handleChange} value={value} />
       </Box>
-      <Box>
-        <p>{value}</p>
-      </Box>
       <Ads params={{ search: value }} endPoint="/user/ads" auth></Ads>
     </Box>
   );

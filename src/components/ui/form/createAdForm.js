@@ -40,7 +40,6 @@ const CreateAdForm = (props) => {
         })}
         onSubmit={async (values, actions) => {
           const res = await Requester.post("/ads", values, true);
-          console.log(res);
           if (res.success === true) {
             toast({
               title: "Ad created.",
