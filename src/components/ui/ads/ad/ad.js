@@ -45,7 +45,7 @@ const Ad = (props) => {
               fontSize="0.8vw"
               mr="0.5vw"
             >
-              {ad.address}
+              {ad.location}
             </Text>
             <Text color="teal" fontWeight="bold" fontSize="1vw">
               {ad.city}
