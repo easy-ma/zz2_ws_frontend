@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, Form, Formik } from "formik";
-import { Button, VStack, Box } from "@chakra-ui/react";
+import { Button, VStack, Box,useToast } from "@chakra-ui/react";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import TextAreaInput from "./items/textAreaInput";
@@ -15,13 +15,14 @@ const initValues = {
   imageURL: "",
 };
 const CreateAdForm = (props) => {
+  const toast = useToast();
   return (
     <Box w="full" p={20}>
       <Formik
         initialValues={initValues}
         validationSchema={Yup.object({
-          name: Yup.string().required("Name is required"),
-          description: Yup.string().required("Description is required"),
+          name: Yup.string().min(3).max(50).required("Name is required"),
+          description: Yup.string().min(10).max(200).required("Description is required"),
           address: Yup.string().required("Adress is required."),
           price: Yup.number()
             .typeError("Price must be a positive number")
@@ -36,10 +37,25 @@ const CreateAdForm = (props) => {
         })}
         onSubmit={async (values, actions) => {
           const res = await Requester.post("/ads", values, true);
+          console.log(res);
           if (res.success === true) {
-            actions.setSubmitting(false);
+            toast({
+              title: "Ad created.",
+              description: "Your ad has been successfully created.",
+              status: "success",
+              duration: 7000,
+              isClosable: true,
+            })
+            actions.setSubmitting(true);
             actions.resetForm();
           } else {
+            toast({
+              title: "Ad could not be created",
+              description: "You should try again later.",
+              status: "error",
+              duration: 7000,
+              isClosable: true,
+            })
             actions.setSubmitting(false);
           }
         }}

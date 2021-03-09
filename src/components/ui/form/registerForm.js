@@ -1,13 +1,14 @@
 import React from "react";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
-import { Container, Button, Heading, VStack, Text } from "@chakra-ui/react";
+import { Container, Button, Heading, VStack, Text,useToast } from "@chakra-ui/react";
 import PasswordInput from "./items/passwordInput";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import RLink from "../links/routerLink";
 import { useHistory, useLocation } from "react-router-dom";
 import Requester from "../../../Requester";
+import {useAuth} from "../../../helpers/auth"
 
 const initValues = {
   email: "",
@@ -19,6 +20,8 @@ const initValues = {
 const RegisterForm = (props) => {
   const history = useHistory();
   const location = useLocation();
+  const auth = useAuth();
+  const toast = useToast();
   const { from } = location.state || { from: { pathname: "/" } };
   return (
     <>
@@ -44,12 +47,26 @@ const RegisterForm = (props) => {
           onSubmit={async (values, actions) => {
             const res = await Requester.post("/auth/sign-up", values);
             if (res.success === true) {
-              actions.setSubmitting(false);
-              props.signin(res.data.token, () => {
+              toast({
+                title: "You successfully register",
+                description: "You are now logged in",
+                status: "success",
+                duration: 7000,
+                isClosable: true,
+              })
+              actions.setSubmitting(true);
+              auth.signin(res.data.token, () => {
                 history.replace(from);
               });
               actions.resetForm();
             } else {
+              toast({
+                title: "We could not register",
+                description: res?.data?.message,
+                status: "error",
+                duration: 7000,
+                isClosable: true,
+              })
               actions.setSubmitting(false);
               actions.resetForm();
             }
