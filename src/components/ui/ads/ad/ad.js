@@ -20,22 +20,21 @@ const Ad = (props) => {
       mr="1vw"
       mb="5vw"
     >
-      <Box w="auto" h="15%">
+      <Box w="auto" h="50%">
         <Image
           w="100%"
-          h="auto"
+          h="100%"
           src={
             ad.imageURL ??
             "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539__340.jpg"
           }
-          overflow="scroll"
+          overflow="hidden"
         />
       </Box>
-      <Flex flexDirection="column" h="65%" justifyContent="space-between" p={6}>
+      <Flex flexDirection="column" h="50%" justifyContent="space-between" p={6}>
         <Box h="30%">
           <Heading as="h3" fontSize="1.1vw" mb="1vh">
-            {" "}
-            {ad.name}{" "}
+            {ad.name}
           </Heading>
           <Divider></Divider>
           <Flex flexWrap="wrap" alignItems="baseline">
@@ -45,12 +44,10 @@ const Ad = (props) => {
               fontSize="0.8vw"
               mr="0.5vw"
             >
-              {" "}
-              {ad.address},{" "}
+              {ad.address}
             </Text>
             <Text color="teal" fontWeight="bold" fontSize="1vw">
-              {" "}
-              {ad.city}{" "}
+              {ad.city}
             </Text>
           </Flex>
         </Box>
@@ -61,8 +58,7 @@ const Ad = (props) => {
           fontSize="0.7vw"
           h="35%"
         >
-          {" "}
-          {ad.description}{" "}
+          {ad.description}
         </Text>
         <Button
           bgColor="teal.400"
@@ -72,8 +68,7 @@ const Ad = (props) => {
           mt={4}
           onClick={props.zoom}
         >
-          {" "}
-          See in details{" "}
+          See in details
         </Button>
       </Flex>
     </Flex>

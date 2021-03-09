@@ -1,6 +1,13 @@
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
-import { Container, Text, Button, Heading, VStack } from "@chakra-ui/react";
+import {
+  Container,
+  Text,
+  Button,
+  Heading,
+  VStack,
+  useToast,
+} from "@chakra-ui/react";
 import ControlInput from "./items/controlInput";
 import PasswordInput from "./items/passwordInput";
 import ErrorBox from "./items/errorBox";
@@ -19,6 +26,7 @@ const SignInForm = (props) => {
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
+  const toast = useToast();
   return (
     <>
       <Container {...props} p={10} w="full" maxW="lg">
@@ -35,12 +43,26 @@ const SignInForm = (props) => {
           onSubmit={async (values, actions) => {
             const res = await Requester.post("/auth/sign-in", values);
             if (res.success === true) {
-              actions.setSubmitting(false);
+              toast({
+                title: "You successfully signed in",
+                description: "You can now use all the user's feature",
+                status: "success",
+                duration: 7000,
+                isClosable: true,
+              });
+              actions.setSubmitting(true);
               auth.signin(res.data, () => {
                 history.replace(from);
               });
               actions.resetForm();
             } else {
+              toast({
+                title: "We could not sign you up",
+                description: res?.data?.message,
+                status: "error",
+                duration: 7000,
+                isClosable: true,
+              });
               actions.setSubmitting(false);
               actions.resetForm();
             }
