@@ -7,6 +7,7 @@ import BigAd from "../components/ui/ads/ad/bigAd";
 import { Flex, Box, Button } from "@chakra-ui/react";
 import RateNcomments from "../components/ui/advices/rateNcomments/rateNcomments";
 import { useAuth } from "../helpers/auth";
+import { authLinks } from "../links";
 
 export default function HomePage(props) {
   const [value, setValue] = useState("");
@@ -15,26 +16,30 @@ export default function HomePage(props) {
 
   const handleChange = (val) => {
     setValue(val);
+
   };
 
   const zoom = () => {
     setIsZoom(!isZoom);
   };
 
+
   return (
     <>
       {!isZoom ? (
         <Box>
-          <Box position="absolute" top="15vh" right="5vw">
+          {user ? <Box position="absolute" top="10vh" right="5vw">
             <RLink to="/ads/add">
               <Button>
                 Create an ad
                 <AddIcon ml="1vw" />
               </Button>
             </RLink>
-          </Box>
+          </Box> :
+          ""
+          }
 
-          <Box>
+          <Box position="absolute" top="20vh" left="30vw" w="40vw">
             <SearchInput handleChange={handleChange} value={value} />
           </Box>
           <Ads params={{ search: value }} endPoint="/ads"></Ads>
