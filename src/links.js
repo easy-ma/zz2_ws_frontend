@@ -6,5 +6,5 @@ export const authLinks = [
 export const unauthLinks = [
   { name: "Home", path: "/" },
   { name: "Register", path: "/register" },
-  { name: "SignIn", path: "/sign-in" },
+  { name: "Sign in", path: "/sign-in" },
 ];

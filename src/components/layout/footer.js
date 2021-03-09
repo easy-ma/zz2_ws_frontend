@@ -34,7 +34,7 @@ const Footer = ({ flex }) => {
         <Heading as="h3" fontSize="lg">
           Explore
         </Heading>
-        <Divider border="1px" bgColor="teal.600"></Divider>
+        <Divider  borderColor="teal.600"></Divider>
       </GridItem>
 
       {links.map((link, i) => {
@@ -52,7 +52,7 @@ const Footer = ({ flex }) => {
         <Heading as="h3" fontSize="lg">
           Legal
         </Heading>
-        <Divider border="1px" bgColor="teal.600"></Divider>
+        <Divider  borderColor="teal.600" ></Divider>
       </GridItem>
       <GridItem rowStart={3} colStart={10} rowSpan={2} colSpan={1}>
         <RLink fontSize="sm" to="/terms-of-services">
