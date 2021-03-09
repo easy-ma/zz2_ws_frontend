@@ -151,12 +151,7 @@ const RateNcomments = (props) => {
           />
         )}
       </Flex>
-      <NavPage
-        maxPage={maxPage}
-        pageNumber={pageNumber}
-        zoom={props.zoom}
-        dispatch={dispatch}
-      />
+      <NavPage maxPage={maxPage} pageNumber={pageNumber} dispatch={dispatch} />
     </>
   );
 };

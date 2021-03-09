@@ -10,6 +10,7 @@ import NotFoundPage from "../pages/404";
 import AddPage from "../pages/addPage";
 import AddCommentPage from "../pages/addCommentPage";
 import { useAuth } from "./auth";
+import adFocusPage from "../pages/adFocusPage";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
@@ -19,6 +20,7 @@ const routes = [
   { path: "/terms-of-services", component: TermsPage },
   { path: "/ads/add", component: AddPage },
   { path: "/comment/add", component: AddCommentPage, auth: true },
+  { path: "/comment/:id", component: adFocusPage },
   { path: "*", component: NotFoundPage },
 ];
 

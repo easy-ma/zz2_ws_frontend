@@ -8,6 +8,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import React from "react";
+import RLink from "../../links/routerLink";
 
 const Ad = (props) => {
   const { ad } = props;
@@ -64,17 +65,19 @@ const Ad = (props) => {
           {" "}
           {ad.description}{" "}
         </Text>
-        <Button
-          bgColor="teal.400"
-          h="4vh"
-          color="white"
-          fontSize="1vw"
-          mt={4}
-          onClick={props.zoom}
-        >
-          {" "}
-          See in details{" "}
-        </Button>
+        <RLink to={`/add/${ad.Id}`}>
+          <Button
+            bgColor="teal.400"
+            h="4vh"
+            color="white"
+            fontSize="1vw"
+            mt={4}
+            onClick={props.zoom}
+          >
+            {" "}
+            See in details{" "}
+          </Button>
+        </RLink>
       </Flex>
     </Flex>
   );

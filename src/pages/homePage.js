@@ -43,7 +43,7 @@ export default function HomePage(props) {
         <Flex>
           <BigAd />
           <Box bg="" w="40%" p={4}>
-            <RateNcomments zoom={zoom} endPoint="/rates/get-all" />
+            <RateNcomments zoom={zoom} endPoint="/rates" />
           </Box>
         </Flex>
       )}

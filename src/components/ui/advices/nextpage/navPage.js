@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box, Button, Center } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import RLink from "../../links/routerLink";
 
 const NavPage = (props) => {
   return (
@@ -25,15 +26,11 @@ const NavPage = (props) => {
         </Flex>
       </Flex>
       <Center>
-        <Button
-          onClick={props.zoom}
-          size="lg"
-          marginTop="40px"
-          bg="teal"
-          color="black"
-        >
-          Back
-        </Button>
+        <RLink to="/">
+          <Button size="lg" marginTop="40px" bg="teal" color="black">
+            Back
+          </Button>
+        </RLink>
       </Center>
     </>
   );
