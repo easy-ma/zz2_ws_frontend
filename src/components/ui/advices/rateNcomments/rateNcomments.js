@@ -84,7 +84,7 @@ const RateNcomments = (props) => {
   const [rates, setRates] = useState([]);
   const [pageNumber, dispatch] = useReducer(reducer, 1);
   useEffect(() => {
-    requester.get({ endPoint }, { page: pageNumber, ...params }).then((res) => {
+    requester.get(endPoint, { page: pageNumber, ...params }).then((res) => {
       if (res.success) {
         setRates([...rates, ...res.data]);
       } else {
