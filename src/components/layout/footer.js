@@ -39,7 +39,13 @@ const Footer = ({ flex }) => {
 
       {links.map((link, i) => {
         return (
-          <GridItem rowStart={3 + i} colStart={8} rowSpan={2} colSpan={1}>
+          <GridItem
+            key={link.name}
+            rowStart={3 + i}
+            colStart={8}
+            rowSpan={2}
+            colSpan={1}
+          >
             <RLink fontSize="sm" to={link.path}>
               {link.name}
             </RLink>

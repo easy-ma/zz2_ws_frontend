@@ -7,7 +7,6 @@ import BigAd from "../components/ui/ads/ad/bigAd";
 import { Flex, Box, Button } from "@chakra-ui/react";
 import RateNcomments from "../components/ui/advices/rateNcomments/rateNcomments";
 import { useAuth } from "../helpers/auth";
-import { authLinks } from "../links";
 
 export default function HomePage(props) {
   const [value, setValue] = useState("");
