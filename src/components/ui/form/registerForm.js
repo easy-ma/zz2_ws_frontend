@@ -45,7 +45,7 @@ const RegisterForm = (props) => {
             const res = await Requester.post("/auth/sign-up", values);
             if (res.success === true) {
               actions.setSubmitting(false);
-              props.signin(res.data.token, () => {
+              props.signin(res.data, () => {
                 history.replace(from);
               });
               actions.resetForm();

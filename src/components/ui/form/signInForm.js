@@ -36,7 +36,7 @@ const SignInForm = (props) => {
             const res = await Requester.post("/auth/sign-in", values);
             if (res.success === true) {
               actions.setSubmitting(false);
-              auth.signin(res.data.token, () => {
+              auth.signin(res.data, () => {
                 history.replace(from);
               });
               actions.resetForm();
