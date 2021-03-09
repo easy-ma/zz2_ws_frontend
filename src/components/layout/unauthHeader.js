@@ -1,18 +1,15 @@
 import { Flex } from "@chakra-ui/react";
 import RLink from "../ui/links/routerLink";
 
-const links = [
-  { name: "Home", path: "/" },
-  { name: "Register", path: "/register" },
-  { name: "SignIn", path: "/sign-in" },
-];
+import { unauthLinks } from "../../links";
 
 const UnauthHeader = (props) => {
   return (
-    <Flex mr="2rem" justifyContent="space-around" width="20%">
-      {links.map((item, idx) => {
+    <Flex mr="10%" alignItems="baseline">
+      {unauthLinks.map((item, idx) => {
         return (
           <RLink
+            mr="4vw"
             key={idx}
             to={item.path}
             fontSize="lg"
