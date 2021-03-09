@@ -8,7 +8,6 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import React from "react";
-// import
 
 const Ad = (props) => {
   const { ad } = props;
@@ -22,13 +21,21 @@ const Ad = (props) => {
       mb="5vw"
     >
       <Box w="auto" h="15%">
-        <Image w="100%" h="auto" src={ad.imgSrc} overflow="scroll" />
+        <Image
+          w="100%"
+          h="auto"
+          src={
+            ad.imageURL ??
+            "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539__340.jpg"
+          }
+          overflow="scroll"
+        />
       </Box>
       <Flex flexDirection="column" h="65%" justifyContent="space-between" p={6}>
         <Box h="30%">
           <Heading as="h3" fontSize="1.1vw" mb="1vh">
             {" "}
-            {ad.title}{" "}
+            {ad.name}{" "}
           </Heading>
           <Divider></Divider>
           <Flex flexWrap="wrap" alignItems="baseline">
@@ -39,7 +46,7 @@ const Ad = (props) => {
               mr="0.5vw"
             >
               {" "}
-              {ad.adress},{" "}
+              {ad.address},{" "}
             </Text>
             <Text color="teal" fontWeight="bold" fontSize="1vw">
               {" "}

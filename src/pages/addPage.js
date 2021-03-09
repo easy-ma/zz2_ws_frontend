@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Heading, Image } from "@chakra-ui/react";
-import AddAdForm from "../components/ui/form/addAdForm";
+import CreateAdForm from "../components/ui/form/createAdForm";
 import { useMediaQuery } from "@chakra-ui/react";
 
 const AddPage = (props) => {
@@ -8,7 +8,7 @@ const AddPage = (props) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   return (
     <Flex flexDirection="column" justifyContent="space-around" h="70%">
-      <Heading textAlign="center" w="100%" as="H2">
+      <Heading textAlign="center" w="100%" as="h2">
         {" "}
         Hi {user?.name ?? "Six balles"}, you are about to add a place !
       </Heading>
@@ -28,7 +28,7 @@ const AddPage = (props) => {
           ml={6}
           borderRadius="5%"
         >
-          <AddAdForm />
+          <CreateAdForm />
         </Flex>
       </Flex>
     </Flex>

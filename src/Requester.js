@@ -7,12 +7,12 @@ class Response {
 }
 class Requester {
   constructor(url) {
+    this.version = 1;
     this.url = url;
   }
 
   async _req(method, path, data = {}, auth = false) {
     let token = null;
-
     if (auth) {
       // localstorage
       token = localStorage.getItem("token");
@@ -27,7 +27,7 @@ class Requester {
       },
     };
 
-    const url = new URL(path, this.url);
+    const url = new URL(`/v${this.version}${path}`, this.url);
     if (method === "GET") {
       const param = new URLSearchParams(data);
       for (const e of param) {

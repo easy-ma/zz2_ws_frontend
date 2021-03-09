@@ -1,13 +1,6 @@
 import React, { useState } from "react";
-import { Field, Form, Formik, validateYupSchema } from "formik";
-import {
-  Button,
-  VStack,
-  Input,
-  Box,
-  FormControl,
-  VisuallyHidden,
-} from "@chakra-ui/react";
+import { Field, Form, Formik } from "formik";
+import { Button, VStack, Box } from "@chakra-ui/react";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import TextAreaInput from "./items/textAreaInput";

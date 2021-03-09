@@ -1,20 +1,17 @@
 import { Button, Flex } from "@chakra-ui/react";
 import RLink from "../ui/links/routerLink";
 import { useHistory } from "react-router-dom";
-
-const links = [
-  { name: "Home", path: "/" },
-  { name: "Profile", path: "/profile" },
-];
+import { authLinks } from "../../links";
 
 const AuthHeader = (props) => {
   const history = useHistory();
   const { signout } = props;
   return (
-    <Flex mr="2rem" justifyContent="space-around" width="20%">
-      {links.map((item, idx) => {
+    <Flex mr="10%" alignItems="baseline">
+      {authLinks.map((item, idx) => {
         return (
           <RLink
+            mr="4vw"
             key={idx}
             to={item.path}
             fontSize="lg"
@@ -24,7 +21,7 @@ const AuthHeader = (props) => {
           </RLink>
         );
       })}
-      <Button onClick={() => signout(() => history.push("/"))}>Signout</Button>
+      <Button onClick={() => signout(() => history.push("/"))}>Sign out</Button>
     </Flex>
   );
 };

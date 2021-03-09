@@ -2,11 +2,11 @@ import React from "react";
 import { Flex, Image, Heading, Text, Box, Divider } from "@chakra-ui/react";
 
 const ad = {
-  imgSrc: "images/card_Example.jpg",
-  title: "Not so confy basement",
+  imageURL: "images/card_Example.jpg",
+  name: "Not so confy basement",
   description:
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dudummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever sinmmy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply ce the 1500s.",
-  adress: "56 Madison Avenue",
+  address: "56 Madison Avenue",
   city: "New York",
   rate: 3,
 };
@@ -23,13 +23,13 @@ const BigAd = (props) => {
       mb="5vw"
     >
       <Box w="auto" h="15%" flex="1">
-        <Image w="100%" h="auto" src={ad.imgSrc} overflow="scroll" />
+        <Image w="100%" h="auto" src={ad.imageURL} overflow="scroll" />
       </Box>
       <Flex flexDirection="column" h="80%" justifyContent="space-between" p={6}>
         <Box h="50%" margin="10px">
           <Heading as="h3" fontSize="1.1vw" mb="1vh">
             {" "}
-            {ad.title}{" "}
+            {ad.name}{" "}
           </Heading>
           <Divider></Divider>
           <Flex flexWrap="wrap" alignItems="baseline">
@@ -40,7 +40,7 @@ const BigAd = (props) => {
               mr="0.5vw"
             >
               {" "}
-              {ad.adress},{" "}
+              {ad.address},{" "}
             </Text>
             <Text color="teal" fontWeight="bold" fontSize="1vw">
               {" "}

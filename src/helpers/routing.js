@@ -10,7 +10,6 @@ import NotFoundPage from "../pages/404";
 import AddPage from "../pages/addPage";
 import AddCommentPage from "../pages/addCommentPage";
 import { useAuth } from "./auth";
-import { omitThemingProps } from "@chakra-ui/react";
 
 const routes = [
   { path: "/", component: HomePage, exact: true },
@@ -35,7 +34,6 @@ const Routing = () => {
 
 function PrivateRoute(props) {
   let auth = useAuth();
-  console.log(props);
   return (
     <Route
       exact={props.exact}

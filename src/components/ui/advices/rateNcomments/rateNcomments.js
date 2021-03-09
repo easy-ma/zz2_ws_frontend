@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect, useState } from "react";
 import {
   Flex,
-  Image,
   Heading,
   Text,
   Box,
@@ -92,7 +91,6 @@ const RateNcomments = (props) => {
       }
     });
   }, [pageNumber]); //effet de bord: élement créant une dépendance de l'output
-  // console.log(pages[`page${pageNumber}`]);
   const maxPage = 3; //Math.ceil(MaxComments/2);
   const maxComments = 5; //res.length
   const user = useAuth().user;
@@ -144,7 +142,7 @@ const RateNcomments = (props) => {
           description={comments[2 * (pageNumber - 1)].description}
           rate={comments[2 * (pageNumber - 1)].rate}
         />
-        {maxPage === pageNumber && maxComments % 2 != 0 ? null : (
+        {maxPage === pageNumber && maxComments % 2 !== 0 ? null : (
           <Advice
             name={comments[2 * (pageNumber - 1) + 1].name}
             title={comments[2 * (pageNumber - 1) + 1].title}

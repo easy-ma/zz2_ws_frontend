@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 import { chakra } from "@chakra-ui/react";
 
 const RLink = (props) => {
