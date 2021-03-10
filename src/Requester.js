@@ -233,4 +233,4 @@ class Requester {
   }
 }
 
-export default new Requester("https://localhost:44345");
+export default new Requester("http://localhost:5001");
