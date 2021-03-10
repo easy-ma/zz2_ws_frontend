@@ -90,7 +90,6 @@ class Requester {
   }
 
   async _req(method, path, data = {}, auth = false) {
-    console.log("REQ", path);
     let token = "";
     if (auth) {
       token = localStorage.getItem("token");

@@ -1,31 +1,51 @@
 import React, { useState } from "react";
 import { Field, Form, Formik } from "formik";
-import { Button, VStack, Box } from "@chakra-ui/react";
+import { Button, VStack, Box, useToast } from "@chakra-ui/react";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import TextAreaInput from "./items/textAreaInput";
 import * as Yup from "yup";
-import Rating from "../advices/Ratings/rating";
+import Rating from "../ratesAndComments/rating/rating";
+import requester from "../../../Requester";
 
-const AddCommenForm = (props) => {
+const AddCommenForm = ({adId}) => {
   const initValues = {};
+  const toast = useToast();
   const [rating, setRating] = useState(0);
   return (
     <Box w="full" p={20}>
       <Formik
-        initialValues={{ title: "", description: "", rate: rating }}
+        initialValues={{ title: "", comment: "", rate: rating, adId}}
         validationSchema={Yup.object({
-          title: Yup.string().required("Title is required"),
-          description: Yup.string().required("Description is required"),
-          //   rate: Yup.string().required("rate"),
+          title: Yup.string().min(5).max(50).required("Title is required"),
+          comment: Yup.string().min(10).max(200),
+          // rate: Yup.number().required("Rate is required"),
         })}
         onSubmit={(values, actions) => {
-          setTimeout(() => {
-            values.rate = rating;
-            actions.setSubmitting(false);
-            alert(JSON.stringify(values, null, 2));
-            actions.resetForm();
-          }, 1000);
+         
+          values.rate = rating;
+          requester.post("/rates", values, true).then(res => {
+            if (res.success === true) {
+              toast({
+                title: "Comment created.",
+                description: "Your comment has been successfully created.",
+                status: "success",
+                duration: 7000,
+                isClosable: true,
+              });
+              actions.setSubmitting(true);
+              actions.resetForm();
+            } else {
+              toast({
+                title: "Comment could not be created",
+                description: "You should try again later.",
+                status: "error",
+                duration: 7000,
+                isClosable: true,
+              });
+              actions.setSubmitting(false);
+            }
+          })
         }}
       >
         {({ values, isSubmitting, errors, handleChange, touched }) => (
@@ -41,22 +61,25 @@ const AddCommenForm = (props) => {
                 <ControlInput
                   {...field}
                   value={values.title}
+                  isInvalid={form.errors.title && form.touched.title}
                   label="Title"
                   id="title"
+                  type="text"
                   placeholder="Enter your title"
                   onChange={handleChange}
                 />
               )}
             </Field>
-            <Field name="description">
+            <Field name="comment">
               {({ field, form }) => (
                 <TextAreaInput
                   {...field}
-                  value={values.description}
-                  label="Description"
-                  id="description"
-                  type="description"
-                  placeholder="Enter your description"
+                  value={values.comment}
+                  isInvalid={form.errors.comment && form.touched.comment}
+                  label="Comment"
+                  id="comment"
+                  type="text"
+                  placeholder="Enter your comment"
                   onChange={handleChange}
                 />
               )}

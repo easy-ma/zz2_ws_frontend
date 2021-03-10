@@ -1,13 +1,11 @@
 import React,{useState,useEffect} from "react";
 import Ad from "../components/ui/ads/ad/ad";
-import RatesAndComments from "../components/ui/advices/ratesAndComments/ratesAndComments";
+import RatesAndComments from "../components/ui/ratesAndComments/ratesAndComments";
 import { Flex, Box } from "@chakra-ui/react";
 import requester from "../Requester"
 
 const AdDetailPage = (props) => {
   const [adDetailed,setAdDetailed] = useState({}); 
-
-  console.log(props.location.pathname.split('/')[2]);
   useEffect(()=>{
     requester.get(`/ads/${props.location.pathname.split('/')[2]}`).then((res) => {
       if (res.success) {
@@ -22,7 +20,7 @@ const AdDetailPage = (props) => {
     <Flex justifyContent="center">
       <Ad detailed ad={adDetailed}/>
       <Box bg="" w="40%" p={4}>
-        <RatesAndComments endPoint="/rates" />
+        <RatesAndComments ad={adDetailed} endPoint="/rates" />
       </Box>
     </Flex>
   );

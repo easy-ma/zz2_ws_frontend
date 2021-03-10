@@ -19,7 +19,7 @@ const routes = [
   { path: "/profile", component: ProfilePage, auth: true },
   { path: "/terms-of-services", component: TermsPage },
   { path: "/ads/add", component: AddPage },
-  { path: "/comment/add", component: AddCommentPage, auth: true },
+  { path: "/comment/add/:id", component: AddCommentPage, auth: true },
   { path: "/ads/:id", component: AdDetailPage },
   { path: "*", component: NotFoundPage },
 ];

@@ -4,13 +4,13 @@ import AddCommentForm from "../components/ui/form/addCommentForm";
 import { useMediaQuery } from "@chakra-ui/react";
 
 const AddCommentPage = (props) => {
-  const { user } = props;
+  const adId = props.location.pathname.split('/')[3]
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   return (
     <Flex flexDirection="column" justifyContent="space-around" h="70%">
-      <Heading textAlign="center" w="100%" as="H2">
+      <Heading textAlign="center" w="100%" as="h2">
         {" "}
-        Hi {user?.name ?? "Six balles"}, you are about to add a comment !
+        Hi, you are about to add a comment !
       </Heading>
       <Flex
         flexDirection="row"
@@ -31,7 +31,7 @@ const AddCommentPage = (props) => {
           ml={6}
           borderRadius="5%"
         >
-          <AddCommentForm />
+          <AddCommentForm adId={adId} />
         </Flex>
       </Flex>
     </Flex>
