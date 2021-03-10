@@ -10,7 +10,7 @@ const Layout = ({ isHome, children }) => {
       <Flex minHeight="90vh" justifyContent="center" alignItems="center">
         {children}
       </Flex>
-      {/* <Footer /> */}
+      <Footer />
     </Flex>
   );
 };
