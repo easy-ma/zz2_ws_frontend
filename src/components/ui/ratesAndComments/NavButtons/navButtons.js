@@ -3,7 +3,7 @@ import { Flex, Box, Button, Center } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import RLink from "../../links/routerLink";
 
-const NavPage = (props) => {
+const NavButton = (props) => {
   const {dispatch,leftButton,RightButton} = props;
   return (
     <>
@@ -44,4 +44,4 @@ const NavPage = (props) => {
   );
 };
 
-export default NavPage;
+export default NavButton;

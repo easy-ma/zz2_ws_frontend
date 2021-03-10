@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import Rate from "./rate/rate"
 
-import Comments from "./comments/comments";
-import NavPage from "./navButtons/navButtons";
+import Comments from "./Comments/comments";
+import NavPage from "./NavButtons/navButtons";
 import requester from "../../../Requester";
 import RLink from "../links/routerLink";
 import { useAuth } from "../../../helpers/auth";
