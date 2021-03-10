@@ -8,6 +8,8 @@ function reducer(state, action) {
       return state + 1;
     case "decrement":
       return state - 1;
+    case "reset":
+      return 1;
     default:
       throw new Error();
   }
@@ -28,16 +30,22 @@ const fetchPage = (endpoint, pageNumber, params, auth, setState) => {
 
 const Ads = (props) => {
   const { endPoint, params, auth } = props;
+
   const [ads, setAds] = useState({});
   const [pageNumber, dispatch] = useReducer(reducer, 1);
+  const [lastSearch, setLastSearch] = useState(params.search);
 
   useEffect(() => {
     fetchPage(endPoint, 1, params, auth, setAds);
   }, [endPoint, params, auth]);
 
   useEffect(() => {
+    if (lastSearch !== params.search) {
+      dispatch({ type: "reset" });
+      setLastSearch(params.search);
+    }
     fetchPage(endPoint, pageNumber + 1, params, auth, setAds);
-  }, [endPoint, pageNumber, params, auth]);
+  }, [endPoint, pageNumber, params, auth, lastSearch]);
 
   return (
     <Slider

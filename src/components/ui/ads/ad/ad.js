@@ -15,55 +15,58 @@ const Ad = (props) => {
   return (
     <Flex
       w="18vw"
+      h="55vh"
       flexDirection="column"
       boxShadow="xl"
       ml="1vw"
       mr="1vw"
       mb="5vw"
     >
-      <Box w="auto" h="15%">
+      <Box w="auto" minHeight="40%">
         <Image
           w="100%"
-          h="auto"
+          h="100%"
           src={
             ad.imageURL ??
             "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539__340.jpg"
           }
-          overflow="scroll"
+          overflow="hidden"
         />
       </Box>
-      <Flex flexDirection="column" h="65%" justifyContent="space-between" p={6}>
-        <Box h="30%">
+      <Flex
+        flexDirection="column"
+        minHeight="60%"
+        justifyContent="space-between"
+        p="1.2vw"
+      >
+        <Box>
           <Heading as="h3" fontSize="1.1vw" mb="1vh">
-            {" "}
-            {ad.name}{" "}
+            {ad.name}
           </Heading>
-          <Divider></Divider>
-          <Flex flexWrap="wrap" alignItems="baseline">
-            <Text
-              color="teal"
-              fontWeight="semibold"
-              fontSize="0.8vw"
-              mr="0.5vw"
-            >
-              {" "}
-              {ad.address},{" "}
-            </Text>
-            <Text color="teal" fontWeight="bold" fontSize="1vw">
-              {" "}
-              {ad.city}{" "}
-            </Text>
-          </Flex>
         </Box>
+        <Divider></Divider>
+        <Flex flexWrap="wrap" alignItems="baseline">
+          <Text
+            overflowWrap="anywhere"
+            color="teal"
+            fontWeight="semibold"
+            fontSize="0.8vw"
+            mr="0.5vw"
+          >
+            {ad.location}
+          </Text>
+          {/* <Text color="teal" fontWeight="bold" fontSize="1vw">
+              {ad.city}
+            </Text> */}
+        </Flex>
         <Text
           textAlign="justify"
           lineHeight="center"
-          mt={2}
+          mt="0.6vw"
           fontSize="0.7vw"
           h="35%"
         >
-          {" "}
-          {ad.description}{" "}
+          {ad.description}
         </Text>
         <RLink to={`/add/${ad.Id}`}>
           <Button
@@ -71,11 +74,12 @@ const Ad = (props) => {
             h="4vh"
             color="white"
             fontSize="1vw"
-            mt={4}
+            mt="1.2vw"
+            minHeight="4vh"
+            justifySelf="flex-end"
             onClick={props.zoom}
           >
-            {" "}
-            See in details{" "}
+            See in details
           </Button>
         </RLink>
       </Flex>

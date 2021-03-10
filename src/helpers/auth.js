@@ -3,11 +3,23 @@ import Requester from "../Requester";
 
 const authContext = createContext();
 
+const setToken = ({ token, refreshToken }) => {
+  localStorage.setItem("token", token);
+  localStorage.setItem("refreshToken", refreshToken);
+};
+
+const unsetToken = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("refreshToken");
+};
+
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
+    if (token && token.length > 0) {
       Requester.get("/auth/verify", {}, true).then((res) => {
         if (res.success) {
           setUser("user");
@@ -15,23 +27,39 @@ function useProvideAuth() {
           localStorage.removeItem("token");
         }
       });
+    } else {
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (refreshToken && refreshToken.length > 0) {
+        Requester.post("/auth/refresh-token", { refreshToken }, false).then(
+          (res) => {
+            if (res.success) {
+              setUser("user");
+              setToken(res.data);
+            } else {
+              unsetToken();
+            }
+          }
+        );
+      }
     }
-  });
+    setLoading(false);
+  }, []);
 
   const signin = (token, cb) => {
-    localStorage.setItem("token", token);
+    setToken(token);
     setUser("user");
     cb();
   };
 
   const signout = (cb) => {
-    localStorage.removeItem("token");
+    unsetToken();
     setUser(null);
     cb();
   };
 
   return {
     user,
+    loading,
     signin,
     signout,
   };

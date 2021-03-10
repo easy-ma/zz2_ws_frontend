@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, Form, Formik } from "formik";
-import { Button, VStack, Box } from "@chakra-ui/react";
+import { Button, VStack, Box, useToast } from "@chakra-ui/react";
 import ErrorBox from "./items/errorBox";
 import ControlInput from "./items/controlInput";
 import TextAreaInput from "./items/textAreaInput";
@@ -9,20 +9,21 @@ import Requester from "../../../Requester";
 
 const initValues = {
   name: "",
-  address: "",
+  location: "",
   description: "",
   price: "",
   imageURL: "",
 };
 const CreateAdForm = (props) => {
+  const toast = useToast();
   return (
     <Box w="full" p={20}>
       <Formik
         initialValues={initValues}
         validationSchema={Yup.object({
-          name: Yup.string().required("Name is required"),
-          description: Yup.string().required("Description is required"),
-          address: Yup.string().required("Adress is required."),
+          name: Yup.string().min(5).max(50).required("Name is required"),
+          description: Yup.string().min(10).max(200).required("Description is required"),
+          location: Yup.string().min(5).max(200).required("location is required."),
           price: Yup.number()
             .typeError("Price must be a positive number")
             .positive("Price must be positive")
@@ -37,9 +38,23 @@ const CreateAdForm = (props) => {
         onSubmit={async (values, actions) => {
           const res = await Requester.post("/ads", values, true);
           if (res.success === true) {
-            actions.setSubmitting(false);
+            toast({
+              title: "Ad created.",
+              description: "Your ad has been successfully created.",
+              status: "success",
+              duration: 7000,
+              isClosable: true,
+            });
+            actions.setSubmitting(true);
             actions.resetForm();
           } else {
+            toast({
+              title: "Ad could not be created",
+              description: "You should try again later.",
+              status: "error",
+              duration: 7000,
+              isClosable: true,
+            });
             actions.setSubmitting(false);
           }
         }}
@@ -66,16 +81,16 @@ const CreateAdForm = (props) => {
               )}
             </Field>
 
-            <Field name="address">
+            <Field name="location">
               {({ field, form }) => (
                 <ControlInput
                   {...field}
-                  value={values.address}
-                  isInvalid={form.errors.address && form.touched.address}
-                  label="Address"
-                  id="address"
+                  value={values.location}
+                  isInvalid={form.errors.location && form.touched.location}
+                  label="location"
+                  id="location"
                   type="text"
-                  placeholder="Enter your address"
+                  placeholder="Enter your location"
                   onChange={handleChange}
                 />
               )}

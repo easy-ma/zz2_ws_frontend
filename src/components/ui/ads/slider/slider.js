@@ -1,25 +1,25 @@
-import { Flex, IconButton } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Ad from "../ad/ad";
 
 import Fade from "react-reveal/Fade";
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
 const Slider = (props) => {
   const { ads, dispatch, leftButton, rightButton } = props;
   const [left, setLeft] = useState(true);
-
   return (
     <Flex mt="150px" justifyContent="center" w="80vw" alignItems="center">
       {leftButton ? (
-        <IconButton
+        <ArrowLeftIcon
           zIndex="1000"
-          icon={<ArrowBackIcon />}
+          fontSize="2vw"
+          color="teal"
           onClick={() => {
             dispatch({ type: "decrement" });
             setLeft(true);
           }}
-        ></IconButton>
+        ></ArrowLeftIcon>
       ) : (
         ""
       )}
@@ -31,16 +31,14 @@ const Slider = (props) => {
         </Flex>
       </Fade>
       {rightButton ? (
-        <IconButton
-          icon={<ArrowForwardIcon />}
+        <ArrowRightIcon
+          color="teal"
+          fontSize="2vw"
           onClick={() => {
             dispatch({ type: "increment" });
             setLeft(false);
           }}
-        >
-          {" "}
-          {">>"}{" "}
-        </IconButton>
+        ></ArrowRightIcon>
       ) : (
         ""
       )}

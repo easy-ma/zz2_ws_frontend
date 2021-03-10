@@ -25,16 +25,20 @@ export default function HomePage(props) {
     <>
       {!isZoom ? (
         <Box>
-          <Box position="absolute" top="15vh" right="5vw">
-            <RLink to="/ads/add">
-              <Button>
-                Create an ad
-                <AddIcon ml="1vw" />
-              </Button>
-            </RLink>
-          </Box>
+          {user ? (
+            <Box position="absolute" top="10vh" right="5vw">
+              <RLink to="/ads/add">
+                <Button>
+                  Create an ad
+                  <AddIcon ml="1vw" />
+                </Button>
+              </RLink>
+            </Box>
+          ) : (
+            ""
+          )}
 
-          <Box>
+          <Box position="absolute" top="20vh" left="30vw" w="40vw">
             <SearchInput handleChange={handleChange} value={value} />
           </Box>
           <Ads params={{ search: value }} endPoint="/ads"></Ads>

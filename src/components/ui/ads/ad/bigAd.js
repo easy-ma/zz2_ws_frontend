@@ -40,7 +40,7 @@ const BigAd = (props) => {
               mr="0.5vw"
             >
               {" "}
-              {ad.address},{" "}
+              {ad.location},{" "}
             </Text>
             <Text color="teal" fontWeight="bold" fontSize="1vw">
               {" "}
