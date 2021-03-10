@@ -25,7 +25,7 @@ const ProfilePage = (props) => {
       <Heading
         as="h2"
         position="absolute"
-        top="20vh"
+        top="10vh"
         left="37.5vw"
         w="25vw"
         fontSize="3vw"
@@ -33,7 +33,7 @@ const ProfilePage = (props) => {
       >
         This is your ads !
       </Heading>
-      <Box position="absolute" top="30vh" left="30vw" w="40vw">
+      <Box position="absolute" top="20vh" left="30vw" w="40vw">
         <SearchInput handleChange={handleChange} value={value} />
       </Box>
       <Ads params={{ search: value }} endPoint="/user/ads" auth></Ads>
