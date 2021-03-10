@@ -33,19 +33,19 @@ const Ads = (props) => {
 
   const [ads, setAds] = useState({});
   const [pageNumber, dispatch] = useReducer(reducer, 1);
-  const [lastParams, setlastParams] = useState(params);
+  const [lastSearch, setLastSearch] = useState(params.search);
 
   useEffect(() => {
     fetchPage(endPoint, 1, params, auth, setAds);
   }, [endPoint, params, auth]);
 
   useEffect(() => {
-    if (lastParams !== params) {
+    if (lastSearch !== params.search) {
       dispatch({ type: "reset" });
-      setlastParams(params);
+      setLastSearch(params.search);
     }
     fetchPage(endPoint, pageNumber + 1, params, auth, setAds);
-  }, [endPoint, pageNumber, params, auth, lastParams]);
+  }, [endPoint, pageNumber, params, auth, lastSearch]);
 
   return (
     <Slider

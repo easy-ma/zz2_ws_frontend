@@ -15,6 +15,7 @@ const unsetToken = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,7 +42,8 @@ function useProvideAuth() {
         );
       }
     }
-  });
+    setLoading(false);
+  }, []);
 
   const signin = (token, cb) => {
     setToken(token);
@@ -57,6 +59,7 @@ function useProvideAuth() {
 
   return {
     user,
+    loading,
     signin,
     signout,
   };
