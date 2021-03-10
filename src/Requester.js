@@ -6,23 +6,67 @@ class Response {
   }
 }
 
+class Mutex {
+  constructor() {
+    this.available = true;
+    this.waiters = [];
+  }
+
+  lock() {
+    if (!this.available) {
+      return false;
+    }
+    this.available = false;
+    return true;
+  }
+
+  unlock() {
+    this.resolve();
+    this.available = true;
+  }
+
+  resolve() {
+    this.waiters.forEach((p) => p());
+  }
+
+  wait() {
+    return new Promise((resolve) => {
+      this.waiters.push(resolve);
+    });
+  }
+}
+
 const HTTP_OK = 200;
 const HTTP_UNAUTHORIZED = 401;
 class Requester {
   constructor(url) {
     this.version = 1;
     this.url = url;
+
+    this.refreshMutex = new Mutex();
   }
 
-  defaultBody(method, token) {
-    return {
+  _defaultReq(method, token, body) {
+    const req = {
       method: method,
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     };
+    if (token && token.length > 1) {
+      req.headers.Authorization = `Bearer ${token}`;
+    }
+    if (
+      (method === "POST" ||
+        method === "DELETE" ||
+        method === "PUT" ||
+        method === "PATCH") &&
+      body
+    ) {
+      req.body = JSON.stringify(body);
+    }
+    return req;
   }
 
   _createURL(path) {
@@ -31,13 +75,13 @@ class Requester {
 
   async _fetch(url, req) {
     const res = await fetch(url.href, req);
-    if (res.status === HTTP_OK) {
+    try {
       const json = await res.json();
       return {
         res,
         json,
       };
-    } else {
+    } catch (e) {
       return {
         res,
         json: null,
@@ -46,11 +90,12 @@ class Requester {
   }
 
   async _req(method, path, data = {}, auth = false) {
+    console.log("REQ", path);
     let token = "";
     if (auth) {
       token = localStorage.getItem("token");
       if (!token || token.length < 1) {
-        // reresh token
+        // refresh token
         const success = await this.refreshToken();
         if (success) {
           token = localStorage.getItem("token");
@@ -64,7 +109,7 @@ class Requester {
       }
     }
 
-    const req = this.defaultBody(method, token);
+    const req = this._defaultReq(method, token, data);
     const url = this._createURL(path);
 
     if (method === "GET") {
@@ -72,13 +117,6 @@ class Requester {
       for (const e of param) {
         url.searchParams.set(e[0], e[1]);
       }
-    } else if (
-      method === "POST" ||
-      method === "DELETE" ||
-      method === "PUT" ||
-      method === "PATCH"
-    ) {
-      req.body = JSON.stringify(data);
     }
 
     try {
@@ -103,22 +141,30 @@ class Requester {
   }
 
   async refreshToken() {
+    if (!this.refreshMutex.available) {
+      await this.refreshMutex.wait();
+      return true;
+    }
+
+    this.refreshMutex.lock();
     const refreshToken = localStorage.getItem("refreshToken");
 
     if (refreshToken && refreshToken.length > 1) {
-      const d = await this._fetch(this._createURL("/auth/refresh-token"), {
-        ...this.defaultBody("POST"),
-        body: { refreshToken },
-      });
+      const d = await this._fetch(
+        this._createURL("/auth/refresh-token"),
+        this._defaultReq("POST", null, { refreshToken })
+      );
 
       // SUCCESSFULLY REFRESHED
       if (d.res.status === HTTP_OK) {
         localStorage.setItem("token", d.json.data.token);
         localStorage.setItem("refreshToken", d.json.data.refreshToken);
+        this.refreshMutex.unlock();
         return true;
       }
     }
     localStorage.removeItem("refreshToken");
+    this.refreshMutex.unlock();
     return false;
   }
 
