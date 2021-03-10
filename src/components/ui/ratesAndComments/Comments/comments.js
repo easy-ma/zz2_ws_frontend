@@ -15,8 +15,7 @@ const Advice = (props) => {
       >
         <Box h="50%" margin="10px">
           <Heading as="h3" fontSize="1.1vw" mb="1vh">
-            {" "}
-            {props.title}{" "}
+            {props.title}
           </Heading>
           <Divider></Divider>
           <Flex flexWrap="wrap" alignItems="baseline">
@@ -26,8 +25,7 @@ const Advice = (props) => {
               fontSize="0.8vw"
               mr="0.5vw"
             >
-              {" "}
-              {props.name},{" "}
+              {props.name}
             </Text>
             {Array(5)
               .fill("")
@@ -47,8 +45,7 @@ const Advice = (props) => {
           fontSize="0.7vw"
           h="75%"
         >
-          {" "}
-          {props.description}{" "}
+          {props.description}
         </Text>
       </Flex>
     </>

@@ -11,18 +11,19 @@ import React from "react";
 import RLink from "../../links/routerLink";
 
 const Ad = (props) => {
-  const { ad } = props;
+  const { ad,detailed } = props;
   return (
     <Flex
-      w="18vw"
-      h="55vh"
+      w={detailed ? "auto" :"18vw"} 
+      h={detailed ? "70vh" :"55vh"} 
+      maxW="35vw"
       flexDirection="column"
       boxShadow="xl"
-      ml="1vw"
+      ml={`${detailed ? "5" : "1"}vw`}
       mr="1vw"
       mb="5vw"
     >
-      <Box w="auto" minHeight="40%">
+      <Box w="100%" minHeight="40%">
         <Image
           w="100%"
           h="100%"
@@ -43,22 +44,20 @@ const Ad = (props) => {
           <Heading as="h3" fontSize="1.1vw" mb="1vh">
             {ad.name}
           </Heading>
-        </Box>
         <Divider></Divider>
-        <Flex flexWrap="wrap" alignItems="baseline">
           <Text
             overflowWrap="anywhere"
             color="teal"
             fontWeight="semibold"
             fontSize="0.8vw"
             mr="0.5vw"
-          >
+            >
             {ad.location}
           </Text>
           {/* <Text color="teal" fontWeight="bold" fontSize="1vw">
               {ad.city}
             </Text> */}
-        </Flex>
+          </Box>
         <Text
           textAlign="justify"
           lineHeight="center"
@@ -68,20 +67,25 @@ const Ad = (props) => {
         >
           {ad.description}
         </Text>
-        <RLink to={`/add/${ad.Id}`}>
+        {!detailed ? 
+        <RLink to={`/ads/${ad.id}`} mt="1.2vw"
+        minHeight="4vh"
+        justifySelf="flex-end"
+        >
           <Button
             bgColor="teal.400"
-            h="4vh"
+            w="100%"
             color="white"
             fontSize="1vw"
-            mt="1.2vw"
-            minHeight="4vh"
-            justifySelf="flex-end"
+            
             onClick={props.zoom}
-          >
+            >
             See in details
           </Button>
         </RLink>
+        :
+        ""
+        }
       </Flex>
     </Flex>
   );

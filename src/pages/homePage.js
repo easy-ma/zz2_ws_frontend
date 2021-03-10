@@ -3,9 +3,7 @@ import SearchInput from "../components/ui/form/items/searchInput";
 import RLink from "../components/ui/links/routerLink";
 import { AddIcon } from "@chakra-ui/icons";
 import Ads from "../components/ui/ads/ads";
-import BigAd from "../components/ui/ads/ad/bigAd";
-import { Flex, Box, Button } from "@chakra-ui/react";
-import RateNcomments from "../components/ui/advices/rateNcomments/rateNcomments";
+import {  Box, Button } from "@chakra-ui/react";
 import { useAuth } from "../helpers/auth";
 
 export default function HomePage(props) {
@@ -17,13 +15,8 @@ export default function HomePage(props) {
     setValue(val);
   };
 
-  const zoom = () => {
-    setIsZoom(!isZoom);
-  };
 
   return (
-    <>
-      {!isZoom ? (
         <Box>
           {user ? (
             <Box position="absolute" top="10vh" right="5vw">
@@ -43,14 +36,5 @@ export default function HomePage(props) {
           </Box>
           <Ads params={{ search: value }} endPoint="/ads"></Ads>
         </Box>
-      ) : (
-        <Flex>
-          <BigAd />
-          <Box bg="" w="40%" p={4}>
-            <RateNcomments zoom={zoom} endPoint="/rates" />
-          </Box>
-        </Flex>
-      )}
-    </>
-  );
+      )
 }

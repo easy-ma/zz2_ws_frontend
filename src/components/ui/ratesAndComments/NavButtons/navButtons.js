@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Box, Button, Center } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import RLink from "../../links/routerLink";
+import RLink from "../../../links/routerLink";
 
 const NavPage = (props) => {
   return (

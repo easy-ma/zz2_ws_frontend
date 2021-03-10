@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import Advice from "../advice";
-import NavPage from "../nextpage/navPage";
+import NavPage from "./navButtons/navButtons";
 import requester from "../../../../Requester";
 import RLink from "../../links/routerLink";
 import { useAuth } from "../../../../helpers/auth";
@@ -83,7 +83,7 @@ const RateNcomments = (props) => {
   const [rates, setRates] = useState([]);
   const [pageNumber, dispatch] = useReducer(reducer, 1);
   useEffect(() => {
-    requester.get(endPoint, { page: pageNumber, ...params }).then((res) => {
+    requester.get({ endPoint }, { page: pageNumber, ...params }).then((res) => {
       if (res.success) {
         setRates([...rates, ...res.data]);
       } else {
@@ -151,7 +151,12 @@ const RateNcomments = (props) => {
           />
         )}
       </Flex>
-      <NavPage maxPage={maxPage} pageNumber={pageNumber} dispatch={dispatch} />
+      <NavPage
+        maxPage={maxPage}
+        pageNumber={pageNumber}
+        zoom={props.zoom}
+        dispatch={dispatch}
+      />
     </>
   );
 };
