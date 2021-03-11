@@ -25,7 +25,7 @@ const Comment = ({comment}) => {
               fontSize="0.8vw"
               mr="0.5vw"
             >
-              {comment.user}
+              {comment.username}
             </Text>
             {Array(5)
               .fill("")
