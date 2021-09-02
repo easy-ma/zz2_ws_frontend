@@ -21,9 +21,9 @@ The authors of this project are :
 
 ## Preview
 
-![Register page](turradgiver-register-page.png)
+![Register page](./images/turradgiver-register-page.png)
 
-![SignIn page](turradgiver-signin-page.png)
+![SignIn page](./images/turradgiver-signin-page.png)
 
 ## Lint
 
